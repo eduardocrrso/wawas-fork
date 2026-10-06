@@ -22,7 +22,7 @@ const idProduct = __st.rid;
 
 console.log(idProduct, "idProduct")
 
-const assetsUrl = "/assets"
+const assetsUrl = "./assets"
 
 document.addEventListener('DOMContentLoaded', function () {
   if (instances.some(product => product.id === idProduct)) {
@@ -881,28 +881,28 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
                   </svg>
                 </div>
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-15" onclick="addGummy('15')">
-                  <img src="${assetsUrl}/gummy-charms/gummy-pepinillo.svg">
+                  <img src="${assetsUrl}/gummy-pepinillo.svg">
                 </div>
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-16" onclick="addGummy('16')">
-                  <img src="${assetsUrl}/gummy-charms/gummy-hotdog-rojo.svg">
+                  <img src="${assetsUrl}/gummy-hotdog-rojo.svg">
                 </div>
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-17" onclick="addGummy('17')">
-                  <img src="${assetsUrl}/gummy-charms/gummy-hotdog-amarillo.svg">
+                  <img src="${assetsUrl}/gummy-hotdog-amarillo.svg">
                 </div>
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-18" onclick="addGummy('18')">
-                  <img src="${assetsUrl}/gummy-charms/gummy-galleta.svg">
+                  <img src="${assetsUrl}/gummy-galleta.svg">
                 </div>
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-19" onclick="addGummy('19')">
-                  <img src="${assetsUrl}/gummy-charms/gummy-llave-amarilla.svg">
+                  <img src="${assetsUrl}/gummy-llave-amarilla.svg">
                 </div>
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-20" onclick="addGummy('20')">
-                  <img src="${assetsUrl}/gummy-charms/gummy-candado-amarillo.svg">
+                  <img src="${assetsUrl}/gummy-candado-amarillo.svg">
                 </div>
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-21" onclick="addGummy('21')">
-                  <img src="${assetsUrl}/gummy-charms/gummy-llave-dorada.svg">
+                  <img src="${assetsUrl}/gummy-llave-dorada.svg">
                 </div>
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-22" onclick="addGummy('22')">
-                  <img src="${assetsUrl}/gummy-charms/gummy-candado-dorado.svg">
+                  <img src="${assetsUrl}/gummy-candado-dorado.svg">
                 </div>
               </div><!-- row-->
             </div> <!--gummies keyboard-->
