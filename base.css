@@ -3918,3 +3918,7 @@ div[id^=collar] {
 .corazon-4 {
     fill: #fc0f7d;
 }
+
+.gummy > img {
+  height: 36px;
+}
