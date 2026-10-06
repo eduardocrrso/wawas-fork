@@ -1545,7 +1545,7 @@ function updateCharms(caller) {
 
   console.log(JSON.stringify(data))
   const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(data));
-  document.querySelector('#imageProduct').value = `https://wwsmx.com/rv2.html?data=${compressed}`
+  document.querySelector('#imageProduct').value = `https://wwsmx.com/revelador.html?data=${compressed}`
 
 }
 
