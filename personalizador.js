@@ -22,7 +22,24 @@ const idProduct = __st.rid;
 
 console.log(idProduct, "idProduct")
 
-const assetsUrl = "./assets"
+/*  --- GUMMY CHARMS ---
+
+Instrucciones para agregar nuevos gummy charms
+
+1.  Agregar los assets en /assets/charms para probar en un ambiente local
+2.  Agregar un Div con el nombre del archivo como se muestra a continuación:
+      
+      <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-15" onclick="addGummy('15')">
+          <img src="${assetsUrl}/gummy-pepinillo.svg">
+      </div>
+    
+      Asignar un ID único y cambiar la función addGummy con el ID correspondiente.
+3.  Para probar en shopify los archivos se tendrán que subir con el mismo nombre que tienen en el ambiente local a los archivos de la tienda. Cuando el sitio se cargue desde Shopify los archivos deberán ser tomados de los archivos en línea de manera automática gracias a las dos líneas de código debajo de estas instrucciones.
+
+*/
+// Revisar el URL actual para ver de dónde descargamos assets
+const currentUrl = window.location.href;
+const assetsUrl = currentUrl.includes("github") || currentUrl.includes("127.0") ? "./assets/charms" : "https://cdn.shopify.com/s/files/1/0500/2946/1654/files";
 
 document.addEventListener('DOMContentLoaded', function () {
   if (instances.some(product => product.id === idProduct)) {
