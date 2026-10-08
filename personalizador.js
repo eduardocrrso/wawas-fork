@@ -1742,9 +1742,14 @@ function passProductProperties(productId, collarSize, collarColor, charmsArray, 
   document.querySelector('#collarColor').value = collarColor;
   
   let charmsSimplified = [];
+  const abc = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
   charmsArray.forEach((item) => {
     if (item[0] !== '#') {
-      charmsSimplified += `[ ${item[0]} ]`;
+      if (abc.includes(item[0])) {
+        charmsSimplified += `[ ${item[0]} ]`;
+      } else {
+        charmsSimplified += '[ Figura ]';
+      }
     } else if (phoneCharm !== 'N/A') {
       charmsSimplified += ('[Charm teléfono]');
     }
