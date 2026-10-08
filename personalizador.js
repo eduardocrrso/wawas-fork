@@ -1473,7 +1473,6 @@ function addCartPropertiesField() {
     { name: 'Telefono', id: 'telefono' },
     { name: 'Tamaño', id: 'size' },
     { name: '_charms', id: 'charmsForm' },
-    { name: '_id_pixelemos', id: 'idPixelemos' },
   ];
 
   fields.forEach(({ name, id }) => {
@@ -1724,7 +1723,7 @@ function displayCharms(array) {
   if (phone) {
     html = html + '<span><img class="phone-charm" src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" alt="phone charm"></span>'
   }
-  return `<div style="padding:16px">${html}</div><div>Captura:<br><img src="https://imagedelivery.net/vXE13JhqlXIbFcsT7hu9vQ/${getIdPixelemos()}/public"></div>`
+  return `<div style="padding:16px">${html}</div>`
 }
 
 
@@ -1854,195 +1853,10 @@ function displayGummies(array) {
       phone = true
     }
   }
-  return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img src="https://imagedelivery.net/vXE13JhqlXIbFcsT7hu9vQ/${getIdPixelemos()}/public"></div>`
+  return `<div id="gummies" style="padding:16px">${html}</div>`
 
 }
 
-function getIdPixelemos() {
-  document.querySelector('#idPixelemos').value = currentSlug + '-' + Date.now();
-  return document.querySelector('#idPixelemos').value;
-}
-
-/*Capturar pantalla y enviarla */
-// async function capture(event) {
-//   if (allowSubmit) return;
-//   enableBuyButton(false)
-
-//   // Seleccionar el elemento que deseas capturar
-//   event.preventDefault();
-
-//   const form = event.currentTarget.closest('form');
-//   // Esconder los items de borrar charms
-//   const msgBorrar = document.querySelector('.msg-borrar');
-//   const borrarIcon = document.getElementById('vaciar-collar');
-//   msgBorrar.style.display = "none";
-//   borrarIcon.style.display = "none";
-
-//   const finalImage = await getFinalCaptureImage();
-//   const idPixelemosInput = document.querySelector('#idPixelemos');
-//   // Obtener el valor del input #idPixelemos
-//   const idPixelemosValue = idPixelemosInput.value.trim();
-
-//   // Utilizar html2canvas para capturar el elemento como una imagen
-//   try {
-//     // html2canvas(elementToCapture).then(canvas => {
-//       // Obtener la URL de la imagen en formato base64
-//       // const imageData = canvas.toDataURL('image/webp');
-//       const imageBlob = dataURLtoBlob(finalImage);
-//       // Preparar los datos a enviar al servidor
-//       const formData = new FormData();
-//       formData.append('image_data', imageBlob, 'uploaded_image.webp');
-//       formData.append('idPixelemos', idPixelemosValue);
-//       console.log(formData)
-//       // Realizar la solicitud POST utilizando fetch
-//           fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
-//               method: 'POST',
-//               body: formData,
-//            })
-//           .then(response => {
-//               if (!response.ok) {
-//                   enableBuyButton(true)
-//                   throw new Error('Error al enviar la imagen al servidor.');
-//               }
-//               return response.json(); // Convertir la respuesta a JSON
-//           })
-//           .then(data => {
-//               console.log(data)
-//               // Manejar la respuesta del servidor
-//               if (data.success && data.publicUrl) {
-//                   enableBuyButton(true)
-//                   console.log('URL de la imagen generada:', data.publicUrl);
-//                   document.querySelector('#imageProduct').value = data.publicUrl
-//                   allowSubmit = true;
-//                   if (form) {
-//                     form.requestSubmit();
-//                   }
-//                   pointZero()
-//               } else {
-//                   throw new Error('Error al procesar la respuesta del servidor.');
-//               }
-//           })
-//           .catch(error => {
-//               console.error('Error en la solicitud fetch:', error);
-//               allowSubmit = false;
-//               enableBuyButton(true)
-//           });
-
-//     // });
-//   } catch (error) {
-//     console.warn('Errores de captura: ' + error)
-//     enableBuyButton(true)
-//   }
-// }
-
-async function getFinalCaptureImage() {
-  // Obtiene todos los elementos marcados para capturar
-  const scale = 2; // 2x o 3x para más calidad
-  await document.fonts.ready;
-  let elements = ""
-
-  if (isPack) {
-    elements = document.querySelectorAll(".previewPack");
-  } else {
-    elements = document.querySelectorAll(".collar-container");
-  }
-
-  if (elements.length === 0) {
-    console.error("No hay elementos para capturar.");
-    return null;
-  }
-
-
-  // Capturar cada elemento como PNG usando tu librería actual (dom-to-image)
-  let images = [];
-  for (const el of elements) {
-    const infoContainer = document.createElement('div');
-    infoContainer.className = 'info-bottom-right';
-
-    if (!isPack) {
-      let textoTamanio = ""
-      if (idProduct != 9258030989545) {
-        textoTamanio = `Tamaño : ${document.querySelector('#values-collar-size').value}`;
-      } else {
-        textoTamanio = `Tamaño : llavero`;
-      }
-      const h3Tamaño = document.createElement('h3');
-      h3Tamaño.textContent = textoTamanio
-      h3Tamaño.className = 'info-item';
-      // document.querySelector('#charmsForm')
-      document.querySelector('#size').value = document.querySelector('#values-collar-size').value
-      const phoneInput = document.querySelector('#phone');
-      if (phoneInput?.value) {
-        const h3Telefono = document.createElement('h3');
-        h3Telefono.textContent = `Teléfono: ${document.querySelector('#phone') ? document.querySelector('#phone').value : ""}`;
-        h3Telefono.className = 'info-item';
-        infoContainer.appendChild(h3Telefono);
-        document.querySelector('#telefono').value = document.querySelector('#phone') ? document.querySelector('#phone').value : ""
-      }
-      infoContainer.appendChild(h3Tamaño);
-    }
-
-    el.appendChild(infoContainer);
-
-    const styles = window.getComputedStyle(el);
-
-    const dataUrl = await domtoimage.toPng(el, {
-      width: 240 * scale,
-      height: 105 * scale,
-      style: {
-        transform: `scale(${scale})`,
-        transformOrigin: 'top left',
-        fontFamily: styles.fontFamily,
-        fontSize: styles.fontSize,
-        fontWeight: styles.fontWeight,
-        lineHeight: styles.lineHeight,
-        whiteSpace: 'nowrap',
-        display: 'flex',
-        alignItems: 'center',
-      },
-      quality: 1,
-      style: true,
-      cacheBust: true,
-      bgcolor: null
-    });
-    images.push(dataUrl);
-    el.removeChild(infoContainer);
-  }
-
-  images = images.filter(item => item !== "data:,");
-
-
-  // Cargar las imágenes en objetos <img> para unirlas
-  const loadedImages = await Promise.all(
-    images.map(src => new Promise(resolve => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.src = src;
-    }))
-  );
-
-
-  // Crear el canvas final (vertical stacking)
-  const totalHeight = loadedImages.reduce((acc, img) => acc + img.height, 0);
-  const maxWidth = Math.max(...loadedImages.map(img => img.width));
-
-  const finalCanvas = document.createElement("canvas");
-  finalCanvas.width = maxWidth;
-  finalCanvas.height = totalHeight;
-
-  const ctx = finalCanvas.getContext("2d");
-
-  // Dibujar imágenes una debajo de otra
-  let y = 0;
-  loadedImages.forEach(img => {
-    ctx.drawImage(img, 0, y);
-    y += img.height;
-  });
-
-
-  // Retornar la imagen final como PNG
-  return finalCanvas.toDataURL("image/webp");
-}
 
 /**
  * Convierte una cadena Data URI (ej: data:image/webp;base64,...) a un objeto Blob binario.
