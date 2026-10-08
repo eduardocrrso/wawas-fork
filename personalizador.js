@@ -1,3 +1,24 @@
+/*
+
+--- DEBUG ---
+
+Change debugActive to 'true' to activate debugger over the whole code.
+
+*/
+
+const debug = {
+  debugActive: true,
+
+  logProductId: (debugActive) => {
+    if (debug) console.log("idProduct:", idProduct);
+  },
+
+  logPassedItems: (...allItems) => {
+    if (!debug) return;
+    console.log(allItems);
+  }
+}
+
 //ids de producto activas
 const instances = [
   { id: 9117785129193, class: 'collar-para-charms' },// copia dev
@@ -19,8 +40,7 @@ const instances = [
 
 //obtener el id del producto
 const idProduct = __st.rid;
-
-console.log(idProduct, "idProduct")
+debug.logProductId();
 
 /*  --- GUMMY CHARMS ---
 
@@ -1003,7 +1023,7 @@ function customizer(id) {
 
   //agregar campos para enviar personalizador
   addCartPropertiesField()
-  document.querySelector('#charmsForm').value = ""
+  document.querySelector('#charmsCode').value = ""
 
   //cargar teclado personalizado segun id
   switchCustomizer(id)
@@ -1033,7 +1053,7 @@ function switchCustomizer(id, isFirst = true) {
       //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
       if (isFirst) enableBuyButton(false)
-      document.querySelector('#charmsForm').value = ""
+      document.querySelector('#charmsCode').value = ""
       break;
     case 9117785129193: //collar-de-charms
       myLog(currentSlug)
@@ -1052,7 +1072,7 @@ function switchCustomizer(id, isFirst = true) {
       //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
       if (isFirst) enableBuyButton(false)
-      document.querySelector('#charmsForm').value = ""
+      document.querySelector('#charmsCode').value = ""
       break;
     case 7412912783510: //collar-de-charms-mini
       myLog(currentSlug)
@@ -1068,7 +1088,7 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('.size-l').style.display = "none"
       document.querySelector('.size-xl').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
-      displayCharms($charmsArray)
+      // passProductProperties(idProduct, $charmsArray)
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       // document.querySelector(`input[value='5']+label`).click()
@@ -1365,7 +1385,6 @@ function enableBuyButton(enabled) {
 
 function myLog(message) {
   verbose ? console.log(message) : verbose = true
-  console.log($gummiesArray);
 }
 
 function createWawasContainer(node) {
@@ -1469,10 +1488,11 @@ function addCartPropertiesField() {
   if (!buttons) return;
 
   const fields = [
+    { name: 'Color de collar', id: 'collarColor' },
+    { name: 'Charms', id: 'charmsSimplified' },
+    { name: 'Telefono', id: 'phoneCharm' },
     { name: '(Ingresa el siguiente link en tu navegador para ver tu diseño)', id: 'imageProduct' },
-    { name: 'Telefono', id: 'telefono' },
-    { name: 'Tamaño', id: 'size' },
-    { name: '_charms', id: 'charmsForm' },
+    { name: '_Codigo para revelador', id: 'charmsCode' },
   ];
 
   fields.forEach(({ name, id }) => {
@@ -1533,14 +1553,20 @@ function updateCharms(caller) {
   document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%'
   document.querySelector('#phone-level').style.background = phoneDigits == 10 ? 'green' : 'red'
   myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits)
-  document.querySelector('#charmsForm').value = displayCharms($charmsArray)
-  let telefono = (document.querySelector('#phone')) ? document.querySelector('#phone').value : ' No aplica'
-  let general = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value}<br>Color del collar: ${document.querySelector('#values-collar-color').value}<br>Teléfono: ${telefono}</div>`
-  if ($gummiesArray.length !== 0) {
-    document.querySelector('#charmsForm').value = general + displayCharms($charmsArray) + displayGummies($gummiesArray)
-  } else {
-    document.querySelector('#charmsForm').value = general + displayCharms($charmsArray)
-  }
+  
+
+  // Pasa los datos del collar a las propiedades de producto en Shopify
+  let collarSize = document.querySelector('#values-collar-size').value;
+  let collarColor = document.querySelector('#values-collar-color').value;
+  let collarPhone = (document.querySelector('#phone').value) ? document.querySelector('#phone').value : 'N/A';
+  passProductProperties(idProduct, collarSize, collarColor, $charmsArray, collarPhone);
+
+  // if ($gummiesArray.length !== 0) {
+  //   document.querySelector('#charmsCode').value = general + passProductProperties(idProduct, $charmsArray) + displayGummies($gummiesArray)
+  // } else {
+  //   document.querySelector('#charmsCode').value = general + passProductProperties(idProduct, $charmsArray)
+  // }
+
   //desbloquear compras si los charms son >= que el minimo, <= maximo, si los digitos del telefono son 10 
   console.log("Array length = ", $charmsArray.length)
   if (($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms) && ((phoneDigits == 10 && phonecharm) || !phonecharm) && (!firstClick)) {
@@ -1572,7 +1598,7 @@ function updateCharms(caller) {
     cS: document.querySelector('#values-collar-size').value || "NA",
     c: collarColor,
     ch: encodeCharms($charmsArray),
-    p: telefono || "NA"
+    p: collarPhone || "NA"
   }
 
   console.log(JSON.stringify(data))
@@ -1710,22 +1736,32 @@ function changeCollarSize(size, update = true) {
   }
 }
 
-function displayCharms(array) {
-  let html = ''
-  var phone = false
-  for (let j = 0; j < array.length; j++) {
-    if (array[j][0] != '#') {
-      html = html + '<span class="color' + array[j][1] + '" style="color:' + numberToHex(array[j][1]) + '">' + array[j][0] + '</span>'
-    } else {
-      phone = true
-    }
-  }
-  if (phone) {
-    html = html + '<span><img class="phone-charm" src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" alt="phone charm"></span>'
-  }
-  return `<div style="padding:16px">${html}</div>`
-}
+function passProductProperties(productId, collarSize, collarColor, charmsArray, phoneCharm = 'N/A') {
+  debug.logPassedItems(productId, collarColor, charmsArray, phoneCharm);
 
+  document.querySelector('#collarColor').value = collarColor;
+  
+  let charmsSimplified = [];
+  charmsArray.forEach((item) => {
+    if (item[0] !== '#') {
+      charmsSimplified += `[ ${item[0]} ]`;
+    } else if (phoneCharm !== 'N/A') {
+      charmsSimplified += ('[Charm teléfono]');
+    }
+  });
+  document.querySelector('#charmsSimplified').value = charmsSimplified;
+  
+  document.querySelector('#phoneCharm').value = phoneCharm;
+
+  let charmsCode = {
+    productId: productId,
+    collarSize: collarSize,
+    collarColor: collarColor,
+    charmsArray: charmsArray,
+    phoneCharm: phoneCharm,
+  };
+  document.querySelector('#charmsCode').value = JSON.stringify(charmsCode);
+}
 
 function numberToHex(num) {
   num = parseInt(num)
@@ -1825,7 +1861,7 @@ function deleteGummy(index) {
 
 function updateGummys(caller) {
   myLog(caller)
-  document.querySelector('#charmsForm').value = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
+  document.querySelector('#charmsCode').value = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
 }
 
 function changeGummiesColor(color) {
