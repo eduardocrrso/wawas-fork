@@ -1462,31 +1462,28 @@ function activateAccordionByHeaderId(headerId) {
 
 
 function addCartPropertiesField() {
-  let idfieldImg = document.createElement('input')
-  idfieldImg.setAttribute('type', 'hidden')
-  idfieldImg.setAttribute('name', 'properties[(Ingresa el siguiente link en tu navegador para ver tu diseño)]')
-  idfieldImg.setAttribute('id', 'imageProduct')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldImg, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let idfielPhone = document.createElement('input')
-  idfielPhone.setAttribute('type', 'hidden')
-  idfielPhone.setAttribute('name', 'properties[Telefono]')
-  idfielPhone.setAttribute('id', 'telefono')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfielPhone, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let idfieldSize = document.createElement('input')
-  idfieldSize.setAttribute('type', 'hidden')
-  idfieldSize.setAttribute('name', 'properties[Tamaño]')
-  idfieldSize.setAttribute('id', 'size')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldSize, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let field = document.createElement('input')
-  field.setAttribute('type', 'hidden')
-  field.setAttribute('name', 'properties[_charms]')
-  field.setAttribute('id', 'charmsForm')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(field, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let idfield = document.createElement('input')
-  idfield.setAttribute('type', 'hidden')
-  idfield.setAttribute('name', 'properties[_id_pixelemos]')
-  idfield.setAttribute('id', 'idPixelemos')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfield, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
+  const buttons = (
+    "form[id^='product-form-template-'] .product-form__buttons"
+  );
+  // Si no se encuentra "form" no se hace nada, evita crasheos.
+  if (!buttons) return;
+
+  const fields = [
+    { name: '(Ingresa el siguiente link en tu navegador para ver tu diseño)', id: 'imageProduct' },
+    { name: 'Telefono', id: 'telefono' },
+    { name: 'Tamaño', id: 'size' },
+    { name: '_charms', id: 'charmsForm' },
+    { name: '_id_pixelemos', id: 'idPixelemos' },
+  ];
+
+  fields.forEach(({ name, id }) => {
+    if (document.getElementById(id)) return; // Evitar duplicados
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = `properties[${name}]`;
+    input.id = id;
+    document.querySelector(buttons).parentElement.insertBefore(input, document.querySelector(buttons));
+  });
 }
 
 
