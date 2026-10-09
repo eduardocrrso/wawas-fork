@@ -1018,7 +1018,7 @@ ul.keyboards-tabs-nav-tabs {
 }
 
 /*Gummies container*/
-#gummies-container {
+.gummies-container {
     width: 100%;
     height: var(--gummies-container-height);
     margin-bottom: calc(var(--gummies-container-height) * -1);
@@ -1027,14 +1027,14 @@ ul.keyboards-tabs-nav-tabs {
     padding: 0 14px;
 }
 
-#gummies-container .gummy {
+.gummies-container .gummy {
     margin: 8px;
     cursor: pointer;
     font-size: 32px;
     height: fit-content;
 }
 
-#gummies-container #gummy-0 {
+.gummies-container #gummy-0 {
     height: 48px;
     position: relative;
     bottom: 3px;

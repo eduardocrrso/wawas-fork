@@ -21,6 +21,9 @@ const debug = {
   logCaller: (caller) => {
     if (debug) console.log('Caller: ' + caller);
   },
+  log: (...anything) => {
+    console.log(anything);
+  }
 }
 
 //ids de producto activas
@@ -31,7 +34,6 @@ const instances = [
   { id: 7820838174870, class: 'charms-extra-xs' },
   { id: 7319719280790, class: 'charms-extra' },
   { id: 7804532261014, class: 'pechera-y-correa-para-mascota-de-charms' },
-  { id: 9117784867049, class: 'collar-de-gummies' }, // otra copia gummies
   { id: 7634477645974, class: 'collar-de-gummies' },
   { id: 7923429998742, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
@@ -53,7 +55,7 @@ Instrucciones para agregar nuevos gummy charms
 1.  Agregar los assets en /assets/charms para probar en un ambiente local
 2.  Agregar un Div con el nombre del archivo como se muestra a continuación:
       
-      <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-15" onclick="addGummy('15')">
+      <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-15" onclick="addCharm('15', 'gummy')">
           <img src="${assetsUrl}/gummy-pepinillo.svg">
       </div>
     
@@ -305,50 +307,50 @@ const charmsKeyboardHTML = `
       </div>
   <div class="keyboard charms-keyboard">
     <div class="lastrow">
-      <div class="keyboard_key_lastrow color11" id="charm-key-Q" onclick="addCharm('Q')">Q</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-W" onclick="addCharm('W')">W</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-E" onclick="addCharm('E')">E</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-R" onclick="addCharm('R')">R</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-T" onclick="addCharm('T')">T</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-Y" onclick="addCharm('Y')">Y</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-U" onclick="addCharm('U')">U</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-I" onclick="addCharm('I')">I</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-O" onclick="addCharm('O')">O</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-P" onclick="addCharm('P')">P</div>
+      <div class="keyboard-key color11" id="charm-key-Q" onclick="addCharm('Q')">Q</div>
+      <div class="keyboard-key color11" id="charm-key-W" onclick="addCharm('W')">W</div>
+      <div class="keyboard-key color11" id="charm-key-E" onclick="addCharm('E')">E</div>
+      <div class="keyboard-key color11" id="charm-key-R" onclick="addCharm('R')">R</div>
+      <div class="keyboard-key color11" id="charm-key-T" onclick="addCharm('T')">T</div>
+      <div class="keyboard-key color11" id="charm-key-Y" onclick="addCharm('Y')">Y</div>
+      <div class="keyboard-key color11" id="charm-key-U" onclick="addCharm('U')">U</div>
+      <div class="keyboard-key color11" id="charm-key-I" onclick="addCharm('I')">I</div>
+      <div class="keyboard-key color11" id="charm-key-O" onclick="addCharm('O')">O</div>
+      <div class="keyboard-key color11" id="charm-key-P" onclick="addCharm('P')">P</div>
     </div>
     <div class="lastrow">
-      <div class="keyboard_key_lastrow color11" id="charm-key-A" onclick="addCharm('A')">A</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-S" onclick="addCharm('S')">S</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-D" onclick="addCharm('D')">D</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-F" onclick="addCharm('F')">F</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-G" onclick="addCharm('G')">G</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-H" onclick="addCharm('H')">H</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-J" onclick="addCharm('J')">J</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-K" onclick="addCharm('K')">K</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-L" onclick="addCharm('L')">L</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-Ã‘" onclick="addCharm('Ñ')">Ñ</div>
+      <div class="keyboard-key color11" id="charm-key-A" onclick="addCharm('A')">A</div>
+      <div class="keyboard-key color11" id="charm-key-S" onclick="addCharm('S')">S</div>
+      <div class="keyboard-key color11" id="charm-key-D" onclick="addCharm('D')">D</div>
+      <div class="keyboard-key color11" id="charm-key-F" onclick="addCharm('F')">F</div>
+      <div class="keyboard-key color11" id="charm-key-G" onclick="addCharm('G')">G</div>
+      <div class="keyboard-key color11" id="charm-key-H" onclick="addCharm('H')">H</div>
+      <div class="keyboard-key color11" id="charm-key-J" onclick="addCharm('J')">J</div>
+      <div class="keyboard-key color11" id="charm-key-K" onclick="addCharm('K')">K</div>
+      <div class="keyboard-key color11" id="charm-key-L" onclick="addCharm('L')">L</div>
+      <div class="keyboard-key color11" id="charm-key-Ã‘" onclick="addCharm('Ñ')">Ñ</div>
     </div>
     <div class="lastrow"> 
-      <div class="keyboard_key_lastrow color11" id="charm-key-Z" onclick="addCharm('Z')">Z</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-X" onclick="addCharm('X')">X</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-C" onclick="addCharm('C')">C</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-V" onclick="addCharm('V')">V</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-B" onclick="addCharm('B')">B</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-N" onclick="addCharm('N')">N</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-M" onclick="addCharm('M')">M</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-1" onclick="addCharm('1')">1</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-2" onclick="addCharm('2')">2</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-3" onclick="addCharm('3')">3</div>
+      <div class="keyboard-key color11" id="charm-key-Z" onclick="addCharm('Z')">Z</div>
+      <div class="keyboard-key color11" id="charm-key-X" onclick="addCharm('X')">X</div>
+      <div class="keyboard-key color11" id="charm-key-C" onclick="addCharm('C')">C</div>
+      <div class="keyboard-key color11" id="charm-key-V" onclick="addCharm('V')">V</div>
+      <div class="keyboard-key color11" id="charm-key-B" onclick="addCharm('B')">B</div>
+      <div class="keyboard-key color11" id="charm-key-N" onclick="addCharm('N')">N</div>
+      <div class="keyboard-key color11" id="charm-key-M" onclick="addCharm('M')">M</div>
+      <div class="keyboard-key color11" id="charm-key-1" onclick="addCharm('1')">1</div>
+      <div class="keyboard-key color11" id="charm-key-2" onclick="addCharm('2')">2</div>
+      <div class="keyboard-key color11" id="charm-key-3" onclick="addCharm('3')">3</div>
     </div>
     <div class="lastrow">
-      <div class="keyboard_key_lastrow color11" id="charm-key-4" onclick="addCharm('4')">4</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-5" onclick="addCharm('5')">5</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-6" onclick="addCharm('6')">6</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-7" onclick="addCharm('7')">7</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-8" onclick="addCharm('8')">8</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-9" onclick="addCharm('9')">9</div>
-      <div class="keyboard_key_lastrow color11" id="charm-key-0" onclick="addCharm('0')">0</div>
-      <div class="keyboard_key_lastrow phone-key color11" id="charm-key-phone" onclick="if(!phonecharm)addCharm('#')"><span class="phone-text">Charm de <br> #telefónico</span><img src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" width="24" height="24" alt="phone charm"></div>
+      <div class="keyboard-key color11" id="charm-key-4" onclick="addCharm('4')">4</div>
+      <div class="keyboard-key color11" id="charm-key-5" onclick="addCharm('5')">5</div>
+      <div class="keyboard-key color11" id="charm-key-6" onclick="addCharm('6')">6</div>
+      <div class="keyboard-key color11" id="charm-key-7" onclick="addCharm('7')">7</div>
+      <div class="keyboard-key color11" id="charm-key-8" onclick="addCharm('8')">8</div>
+      <div class="keyboard-key color11" id="charm-key-9" onclick="addCharm('9')">9</div>
+      <div class="keyboard-key color11" id="charm-key-0" onclick="addCharm('0')">0</div>
+      <div class="keyboard-key phone-key color11" id="charm-key-phone" onclick="if(!phonecharm)addCharm('#')"><span class="phone-text">Charm de <br> #telefónico</span><img src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" width="24" height="24" alt="phone charm"></div>
     </div>
         
     </div>
@@ -400,7 +402,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
       font-display: block;
     }
     </style>
-      <div id="vaciar-collar" onclick="emptyGummies();$gummiesArray=[]"><svg aria-hidden="true" focusable="false"
+      <div id="vaciar-collar" onclick="emptyCharms('gummy');$charmsArray=[]"><svg aria-hidden="true" focusable="false"
           data-prefix="far" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img"
           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
           <path fill="#fff"
@@ -440,100 +442,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
         <div class="chaquiron" style="background: rgb(243, 180, 240);">&nbsp;</div>
         <div class="chaquiron" style="background: rgb(217, 124, 223);">&nbsp;</div>
       </div>
-      <div id="gummies-container">
-        <div id="gummy-9" class="gummy gummy-color-rojo" onclick="deleteGummy(0)">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 81.67 61.09" class="gummy-color-rojo">
-            <defs>
-              <style>
-                .rainbow-1 {
-                  fill: #1e1e1c;
-                }
-
-                .rainbow-2 {
-                  fill: #c798ff;
-                }
-
-                .rainbow-3 {
-                  fill: #00cefb;
-                }
-
-                .rainbow-4 {
-                  fill: #ffeb00;
-                }
-
-                .rainbow-5 {
-                  fill: #f8000c;
-                  stroke: #1d1e1c;
-                  stroke-miterlimit: 10;
-                  stroke-width: 0.25px;
-                }
-              </style>
-            </defs>
-            <g id="Layer_2" data-name="Layer 2">
-              <g id="Layer_1-2" data-name="Layer 1">
-                <path class="rainbow-1"
-                  d="M81.42,48.83a40.27,40.27,0,0,0-3.64-15.41c-.22-.47-.44-.94-.68-1.4-.09-.19-.18-.38-.28-.56a2,2,0,0,0-.15-.29l0-.06L76.57,31c-.13-.25-.26-.5-.4-.75l0,0-.06-.11-.3-.52a0,0,0,0,0,0,0l-.38-.64c-.13-.22-.26-.43-.4-.64-.32-.54-.67-1.06-1-1.57l-.38-.54c-.26-.37-.52-.72-.78-1.07l-.35-.45,0,0c-.28-.37-.58-.74-.88-1.09-.09-.11-.18-.22-.28-.32-.34-.42-.71-.83-1.08-1.23l-.28-.3c-.36-.39-.74-.78-1.12-1.15,0,0,0,0,0,0-.44-.44-.9-.86-1.36-1.27l-.12-.11c-.42-.38-.84-.74-1.27-1.09l-.27-.22c-.42-.34-.85-.67-1.28-1l-.31-.23L63.37,16l-.32-.22-.51-.34-1.06-.68-.26-.15c-.4-.25-.81-.48-1.22-.71l-.36-.2c-.36-.2-.72-.39-1.08-.56a2.29,2.29,0,0,0-.31-.16l0,0-.05,0-.62-.29-1.06-.49c-.6-.26-1.21-.51-1.83-.74-1.31-.49-2.64-.91-4-1.27A39,39,0,0,0,44,9l0,0a5.37,5.37,0,1,0-7.8.11l0,0a40.1,40.1,0,0,0-14,4.39C8.9,20.52,1.49,31.67.16,46.7c-.4,4.56.09,9.13,0,13.69,0,.41.1.59.26.67h0a2.82,2.82,0,0,0,.59,0c9.81-.2,19.62-.41,29.43-.58.83,0,.95-.29.92-1-.09-3.1-.18-6.2-.19-9.29,0-5.54,3.93-9.82,9-9.86h.14l.59,0a6.2,6.2,0,0,1,.62.06l.6.1.59.14a7.68,7.68,0,0,1,1.23.4c.19.07.36.15.54.23l.05,0,0,0h0A9.53,9.53,0,0,1,45.8,42a4.06,4.06,0,0,1,.36.26l.38.29a4.15,4.15,0,0,1,.32.27l0,.05c.14.12.27.25.4.38a4,4,0,0,1,.34.38,3.07,3.07,0,0,1,.29.34c.12.15.24.31.35.47s.23.34.33.51l.08.14c.07.12.14.25.2.38a2.53,2.53,0,0,1,.18.37.09.09,0,0,1,0,.06,5.89,5.89,0,0,1,.24.58c0,.1.07.19.1.29a2.46,2.46,0,0,1,.09.29,5.51,5.51,0,0,1,.22.89,4.21,4.21,0,0,1,.09.49h0v0a4.78,4.78,0,0,1,.06.53.57.57,0,0,1,0,.13A7,7,0,0,1,50,50c-.06,3,.13,6,.14,9.06,0,.56.11.85.44,1a1.68,1.68,0,0,0,.53,0c4.92-.14,9.85-.22,14.77-.32s9.85-.21,14.78-.27c.77,0,1.09-.12,1.06-1C81.54,55.27,81.55,52.05,81.42,48.83ZM40,3.72a1.65,1.65,0,1,1-1.65,1.65A1.64,1.64,0,0,1,40,3.72Z">
-                </path>
-                <path class="rainbow-2"
-                  d="M57.3,56.15c0,.82-.24,1-1,1-.9-.07-2,.32-2.8.11a1.07,1.07,0,0,1-.4-.26c-.57-.63-.21-2.11-.25-3.22,0-.47,0-1,0-1.68a26.68,26.68,0,0,0-.3-4.85,12.5,12.5,0,0,0-7.36-8.93,10.64,10.64,0,0,0-1.34-.47l-.76-.19-.44-.07-.11,0a3.31,3.31,0,0,0-.55-.07,10.11,10.11,0,0,0-2.46,0c-6.46.67-11.09,5.94-11.13,12.69,0,2.22.06,4.45.14,6.67,0,.65-.1.93-.82.89s-1.83.21-2.55.1h0l-.15,0h-.08a.82.82,0,0,1-.2-.12c-.69-.54-.26-2-.26-3.06,0-3.08-.39-6.17.46-9.23,2.15-7.68,9.78-13,17.35-12.11l.79.11c.53.09,1,.2,1.54.33l.15,0c.45.12.9.26,1.33.41.21.07.43.15.64.24l.6.25h0a16.26,16.26,0,0,1,9.8,14.54C57.2,51.46,57.19,53.81,57.3,56.15Z">
-                </path>
-                <path class="rainbow-3"
-                  d="M63.51,57c-.88-.08-2,.3-2.73.09L60.6,57a1.37,1.37,0,0,1-.18-.16c-.55-.58-.2-2-.23-3.09-.12-3.45.07-6.9-1.09-10.25a19.62,19.62,0,0,0-9.84-11.23h0a.09.09,0,0,0-.06,0l-.29-.13-.62-.29-1-.4a20,20,0,0,0-2-.62A19.15,19.15,0,0,0,39,30.3,19.5,19.5,0,0,0,21.62,46.53c-.53,3.27-.14,6.58-.07,9.87,0,1.08-.13,1.6-1.35,1.45-.76-.09-1.75.19-2.39,0l-.1,0a.91.91,0,0,1-.16-.11c-.64-.56-.23-1.86-.25-2.84-.07-3.8-.34-7.6.67-11.36A23.68,23.68,0,0,1,41.56,26a22.6,22.6,0,0,1,3,.26c.61.1,1.23.22,1.83.37.38.09.76.2,1.12.31s.84.26,1.25.41l.24.09.4.16.08,0,.26.1.48.22.22.1A23.86,23.86,0,0,1,63.77,44.69a38,38,0,0,1,.57,7.22c0,1.35,0,2.7.1,4.05C64.48,56.69,64.35,57.05,63.51,57Z">
-                </path>
-                <path class="rainbow-4"
-                  d="M71.59,56.22c0,.48-.17.64-.61.59a1.92,1.92,0,0,0-.24,0C70,56.82,69,57,68.3,57a1.26,1.26,0,0,1-.28,0,.6.6,0,0,1-.19-.06,1,1,0,0,1-.22-.13c-.7-.56-.24-2.08-.27-3.17-.09-4.09-.08-8.16-1.38-12.13A26.53,26.53,0,0,0,53.38,26.34l-.08,0c-.39-.21-.78-.41-1.18-.6h0c-.43-.2-.85-.4-1.29-.58-.59-.26-1.2-.48-1.82-.69a26.14,26.14,0,0,0-10.49-1.27A26.56,26.56,0,0,0,14.57,45.4C14,49.2,14.36,53,14.4,56.81c0,.93-.2,1.26-1.14,1.17a25.26,25.26,0,0,1-2.54.1L10.56,58l-.18-.14c-.63-.61-.18-2-.24-3,0-.71,0-1.43-.05-2.14A32.1,32.1,0,0,1,13.9,34.62a30.81,30.81,0,0,1,32-15.38c.79.13,1.57.28,2.33.47q.59.13,1.14.3l1.13.35c.37.12.74.25,1.1.39.7.26,1.38.54,2.06.86A30.93,30.93,0,0,1,70.9,43.86C71.67,48,71.39,52.1,71.59,56.22Z">
-                </path>
-                <path class="rainbow-5"
-                  d="M78.29,56.21c-.31.28-1,.23-1.71.19a9.57,9.57,0,0,0-1.31,0,.81.81,0,0,1-.32,0c-.08-.07-.08-.41-.08-.56,0-2.33-.07-4.69-.13-6.91A33.88,33.88,0,0,0,57.47,20c-.69-.39-1.39-.75-2.11-1.09s-1.65-.75-2.51-1.08c-.44-.17-.89-.33-1.34-.48s-.91-.3-1.38-.44-1-.29-1.51-.41A34,34,0,0,0,7.06,44.8a57.46,57.46,0,0,0-.23,9.44c0,.92.06,1.83.07,2.74a1.1,1.1,0,0,1-.13.71q-.13.14-.66.09a12,12,0,0,0-2.33,0,1.13,1.13,0,0,1-.31,0h0s-.09-.16-.09-.53c0-1.06,0-2.13,0-3.37,0-.55,0-1.14,0-1.78v0a36.78,36.78,0,0,1,4.32-20C15,18.57,28.81,11,43.63,12.34c1.47.14,2.91.34,4.3.6q1.24.24,2.46.54c1.17.3,2.31.64,3.42,1,.38.13.76.27,1.13.42.61.24,1.2.49,1.79.76s1.16.56,1.72.85h0q11.83,6.28,17.64,21.3a38.43,38.43,0,0,1,2.21,14.37c0,.17,0,.33,0,.49s0,.39,0,.58a8.6,8.6,0,0,0,.1,1.22C78.51,55.22,78.61,55.94,78.29,56.21Z">
-                </path>
-              </g>
-            </g>
-          </svg>
-        </div>
-        <div id="gummy-G" class="gummy gummy-color-rojo" onclick="deleteGummy(1)">G</div>
-        <div id="gummy-U" class="gummy gummy-color-rosa-fuerte" onclick="deleteGummy(2)">U</div>
-        <div id="gummy-M" class="gummy gummy-color-rosa-pastel" onclick="deleteGummy(3)">M</div>
-        <div id="gummy-M" class="gummy gummy-color-lila" onclick="deleteGummy(4)">M</div>
-        <div id="gummy-Y" class="gummy gummy-color-morado" onclick="deleteGummy(5)">Y</div>
-        <div id="gummy-8" class="gummy gummy-color-morado" onclick="deleteGummy(6)">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60.77 61.38" class="gummy-color-rojo">
-            <defs>
-              <style>
-                .corazon-1 {
-                  fill: #1e1e1c;
-                }
-
-                .corazon-2 {
-                  fill: #ff0d1a;
-                }
-
-                .corazon-3 {
-                  fill: #ffa0f0;
-                }
-
-                .corazon-4 {
-                  fill: #fc0f7d;
-                }
-              </style>
-            </defs>
-            <g id="Layer_2" data-name="Layer 2">
-              <g id="Layer_1-2" data-name="Layer 1">
-                <path class="corazon-1"
-                  d="M60.17,21.27A16.65,16.65,0,0,0,49.74,9.72l-.11,0h0a5.35,5.35,0,0,0-1-9.28,4.58,4.58,0,0,0-.91-.28A5.49,5.49,0,0,0,46.6,0a5.36,5.36,0,0,0-5.37,5.37,5.43,5.43,0,0,0,1.21,3.41,16.74,16.74,0,0,0-8.86,3.53A29.19,29.19,0,0,0,30.67,15l-.31.32-.07-.07,0,0-1.59-1.56c-.18-.18-.37-.35-.56-.52s-.37-.33-.56-.49-.57-.46-.86-.68l-.49-.36c-.33-.23-.66-.44-1-.64l-.6-.36L24,10.38l-.73-.33a15.28,15.28,0,0,0-1.6-.58,17.26,17.26,0,0,0-7.78-.42A16.69,16.69,0,0,0,0,25.46v.08A17.31,17.31,0,0,0,5.21,37.91L20.94,53.57l6.58,6.55.26.25a4.35,4.35,0,0,0,.92.64l.33.14.24.08a3.68,3.68,0,0,0,1,.15A3.78,3.78,0,0,0,33,60.25L39.29,54c5.53-5.53,11.25-11.25,16.8-17A15.87,15.87,0,0,0,60.17,21.27ZM46.5,3.69a1.42,1.42,0,0,1,.42.06l.22.07A1.64,1.64,0,0,1,46.6,7,1.42,1.42,0,0,1,46.18,7L46,6.88a1.61,1.61,0,0,1-1.11-1.54A1.65,1.65,0,0,1,46.5,3.69Z">
-                </path>
-                <path class="corazon-2"
-                  d="M57.75,21.89c-.06-.24-.13-.47-.2-.7a7,7,0,0,0-.24-.69c-.05-.15-.11-.29-.17-.43a4.87,4.87,0,0,0-.24-.57c-.11-.23-.21-.45-.33-.67a0,0,0,0,0,0,0s0,0,0,0-.14-.27-.22-.4-.21-.36-.32-.54-.22-.35-.34-.52l-.42-.58c-.14-.18-.29-.37-.45-.55a4.48,4.48,0,0,0-.36-.4l-.1-.11c-.16-.18-.33-.36-.51-.53l-.45-.42-.2-.17-.47-.4-.51-.37c-.39-.27-.8-.53-1.22-.77a13,13,0,0,0-1.5-.73l-.26-.1L48.64,12l-.1,0c-.35-.12-.7-.22-1-.31s-.58-.14-.87-.19L46,11.33l-.65-.08-.66,0h-.33a.22.22,0,0,1-.08,0H44c-.3,0-.6,0-.89,0s-.6,0-.89.08a13.15,13.15,0,0,0-1.75.33l-.57.16-.42.13a3.66,3.66,0,0,0-.43.15l-.53.2a14.1,14.1,0,0,0-1.9,1c-.17.1-.34.2-.5.31l-.05,0-.46.32c-.17.12-.34.24-.5.37a27.08,27.08,0,0,0-2.66,2.51l-.92.93a1.7,1.7,0,0,1-1.19.55h0a1.5,1.5,0,0,1-.44-.07h0a1.75,1.75,0,0,1-.83-.54c-.68-.71-1.39-1.41-2.1-2.1a16.46,16.46,0,0,0-3.48-2.62,14,14,0,0,0-1.77-.81c-.19-.07-.37-.14-.56-.19l-.57-.17h0A14.29,14.29,0,0,0,17,11.29a18.21,18.21,0,0,0-2.71.22,14.19,14.19,0,0,0-11.77,14A14.61,14.61,0,0,0,7,36.14L22.7,51.79l6.59,6.56.18.18a1.54,1.54,0,0,0,.46.29l.15,0a1.27,1.27,0,0,0,1.15-.39l6.29-6.3c5.53-5.52,11.24-11.24,16.78-16.93A13.33,13.33,0,0,0,57.75,21.89ZM47.31,37.35c-3.54,3.63-7.18,7.28-10.7,10.8l-4,4a2.87,2.87,0,0,1-2,.86,2.68,2.68,0,0,1-.84-.13l-.2-.07a2.88,2.88,0,0,1-1-.62L28.32,52l-4.51-4.49-9.7-9.66a11.42,11.42,0,0,1-3.45-8.2v-.06a11.08,11.08,0,0,1,9.21-10.89,12.7,12.7,0,0,1,2.1-.16h.11a3.17,3.17,0,0,1,.44,0h.1a.16.16,0,0,0,.07,0H23l.15,0h.11l.3,0,.49.08a5,5,0,0,1,.65.14c.31.08.62.18.92.29l.57.22.49.22.25.13.18.09.05,0,0,0,0,0,.13.07.22.12.14.09.39.25c.23.15.46.32.68.49l0,0,.16.13.16.13c.26.21.51.44.76.68s.41.4.61.61a17,17,0,0,1,1.75-1.61c.22-.17.44-.33.66-.47s.38-.25.58-.36c0,0,0,0,0,0s.2-.12.3-.18h0a5.59,5.59,0,0,1,.65-.32l.38-.17.43-.17.21-.08.23-.08.39-.11.25-.07h0l.11,0,.57-.12.16,0,.2,0,.16,0,.37-.05h.16l.32,0a1.07,1.07,0,0,1,.25,0h1.11a11,11,0,0,1,1.14.12l.57.11a2.42,2.42,0,0,1,.45.1,2.9,2.9,0,0,1,.48.14l.31.09.1,0a5.37,5.37,0,0,1,.56.21,5.17,5.17,0,0,1,.64.28l.55.28.49.29.23.15a9,9,0,0,1,1.06.77c.14.12.28.23.4.35l.39.37.36.38c.12.13.23.26.34.4s.23.28.33.42a11.59,11.59,0,0,1,1.1,1.82c.08.17.15.33.22.5s.12.28.17.43l.06.16c.11.31.2.63.29.95A10.55,10.55,0,0,1,47.31,37.35Z">
-                </path>
-                <path class="corazon-3"
-                  d="M47.5,27.5a8.51,8.51,0,0,0-5-5.83l-.52-.19a4.36,4.36,0,0,0-.59-.17l-.56-.13a8.71,8.71,0,0,0-6.94,1.73,16.82,16.82,0,0,0-1.64,1.55l-.59.6a1.52,1.52,0,0,1-1.09.48,1.3,1.3,0,0,1-.41-.07.49.49,0,0,1-.17-.06,1.72,1.72,0,0,1-.61-.41c-.43-.45-.87-.89-1.32-1.33a9.7,9.7,0,0,0-2.47-1.78l-.39-.17a8.09,8.09,0,0,0-1.08-.37,3,3,0,0,0-.5-.11A9,9,0,0,0,22,21.1a10.26,10.26,0,0,0-1.63.14,8.57,8.57,0,0,0-7.12,8.47A9,9,0,0,0,14,33.2a9.25,9.25,0,0,0,2,2.95Q21.13,41.3,26.3,46.43l4,4,.12.09h0a.34.34,0,0,0,.32-.11q2-2,4-4c3.51-3.51,7.14-7.15,10.66-10.76A8.07,8.07,0,0,0,47.5,27.5Zm-8.87,9.55c-1.63,1.67-3.28,3.32-4.93,5l-1.9,1.9a2,2,0,0,1-1.41.6,1.76,1.76,0,0,1-.46-.06,1.31,1.31,0,0,1-.32-.1.82.82,0,0,1-.28-.14,1.5,1.5,0,0,1-.41-.28l-.11-.1-6.58-6.55A6,6,0,0,1,20.43,33v0a5.83,5.83,0,0,1,7.16-5.66,2.79,2.79,0,0,1,.39.1h0a6.32,6.32,0,0,1,.61.22,6.1,6.1,0,0,1,1.69,1.07,4,4,0,0,1,.38-.32,5.84,5.84,0,0,1,4.79-1.13l.35.08.37.11.1,0a5.81,5.81,0,0,1,3.76,4.07A5.6,5.6,0,0,1,38.63,37.05Z">
-                </path>
-                <path class="corazon-4"
-                  d="M36.74,35.27c-1.64,1.69-3.3,3.35-5,5l-1.47,1.47-6.22-6.2A3.5,3.5,0,0,1,23,33a3.3,3.3,0,0,1,2.73-3.26,5.14,5.14,0,0,1,.66-.05,3.31,3.31,0,0,1,.95.14l.22.08a3.71,3.71,0,0,1,1.09.76l.6.6a1.28,1.28,0,0,0,.61.38l.05,0a1.34,1.34,0,0,0,1.4-.35l.28-.28a7,7,0,0,1,.7-.66,3.32,3.32,0,0,1,2.89-.62l.18.05c.13.05.27.1.39.16a3.25,3.25,0,0,1,1.76,2.16A3.07,3.07,0,0,1,36.74,35.27Z">
-                </path>
-              </g>
-            </g>
-          </svg>
-        </div>
+      <div id="charm-container" class="gummies-container">
       </div>
       <div class="msg-borrar"> Da click a la figura para borrar un Gummie</div>
       </div>
@@ -557,98 +466,98 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
             </div>
             <div class="keyboard">
               <div class="row">
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-Q" onclick="addGummy('Q')">Q</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-W" onclick="addGummy('W')">W</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-E" onclick="addGummy('E')">E</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-R" onclick="addGummy('R')">R</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-T" onclick="addGummy('T')">T</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-Y" onclick="addGummy('Y')">Y</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-U" onclick="addGummy('U')">U</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-I" onclick="addGummy('I')">I</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-O" onclick="addGummy('O')">O</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-P" onclick="addGummy('P')">P</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-Q" onclick="addCharm('Q', 'gummy')">Q</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-W" onclick="addCharm('W', 'gummy')">W</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-E" onclick="addCharm('E', 'gummy')">E</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-R" onclick="addCharm('R', 'gummy')">R</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-T" onclick="addCharm('T', 'gummy')">T</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-Y" onclick="addCharm('Y', 'gummy')">Y</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-U" onclick="addCharm('U', 'gummy')">U</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-I" onclick="addCharm('I', 'gummy')">I</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-O" onclick="addCharm('O', 'gummy')">O</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-P" onclick="addCharm('P', 'gummy')">P</div>
               </div>
               <div class="row">
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-A" onclick="addGummy('A')">A</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-S" onclick="addGummy('S')">S</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-D" onclick="addGummy('D')">D</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-F" onclick="addGummy('F')">F</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-G" onclick="addGummy('G')">G</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-H" onclick="addGummy('H')">H</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-J" onclick="addGummy('J')">J</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-K" onclick="addGummy('K')">K</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-L" onclick="addGummy('L')">L</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-Ñ" onclick="addGummy('Ñ')">Ñ</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-A" onclick="addCharm('A', 'gummy')">A</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-S" onclick="addCharm('S', 'gummy')">S</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-D" onclick="addCharm('D', 'gummy')">D</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-F" onclick="addCharm('F', 'gummy')">F</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-G" onclick="addCharm('G', 'gummy')">G</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-H" onclick="addCharm('H', 'gummy')">H</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-J" onclick="addCharm('J', 'gummy')">J</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-K" onclick="addCharm('K', 'gummy')">K</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-L" onclick="addCharm('L', 'gummy')">L</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-Ñ" onclick="addCharm('Ñ', 'gummy')">Ñ</div>
               </div>
               <div class="row">
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-Z" onclick="addGummy('Z')">Z</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-X" onclick="addGummy('X')">X</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-C" onclick="addGummy('C')">C</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-V" onclick="addGummy('V')">V</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-B" onclick="addGummy('B')">B</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-N" onclick="addGummy('N')">N</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-M" onclick="addGummy('M')">M</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-1" onclick="addGummy('1')">1</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-2" onclick="addGummy('2')">2</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-3" onclick="addGummy('3')">3</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-Z" onclick="addCharm('Z', 'gummy')">Z</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-X" onclick="addCharm('X', 'gummy')">X</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-C" onclick="addCharm('C', 'gummy')">C</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-V" onclick="addCharm('V', 'gummy')">V</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-B" onclick="addCharm('B', 'gummy')">B</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-N" onclick="addCharm('N', 'gummy')">N</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-M" onclick="addCharm('M', 'gummy')">M</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-1" onclick="addCharm('1', 'gummy')">1</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-2" onclick="addCharm('2', 'gummy')">2</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-3" onclick="addCharm('3', 'gummy')">3</div>
               </div>
               <div class="row">
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-4" onclick="addGummy('4')">4</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-5" onclick="addGummy('5')">5</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-6" onclick="addGummy('6')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-4" onclick="addCharm('4', 'gummy')">4</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-5" onclick="addCharm('5', 'gummy')">5</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-6" onclick="addCharm('6', 'gummy')">
                   <img src="${assetsUrl}/gummy-pizza.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-7" onclick="addGummy('7')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-7" onclick="addCharm('7', 'gummy')">
                   <img src="${assetsUrl}/gummy-alien.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-8" onclick="addGummy('8')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-8" onclick="addCharm('8', 'gummy')">
                   <img src="${assetsUrl}/gummy-corazon.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-9" onclick="addGummy('9')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-9" onclick="addCharm('9', 'gummy')">
                   <img src="${assetsUrl}/gummy-arcoiris.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-0" onclick="addGummy('0')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-0" onclick="addCharm('0', 'gummy')">
                   <img src="${assetsUrl}/gummy-alien-glow.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-10" onclick="addGummy('10')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-10" onclick="addCharm('10', 'gummy')">
                   <img src="${assetsUrl}/gummy-billete.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-11" onclick="addGummy('11')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-11" onclick="addCharm('11', 'gummy')">
                   <img src="${assetsUrl}/gummy-anillo.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-12" onclick="addGummy('12')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-12" onclick="addCharm('12', 'gummy')">
                   <img src="${assetsUrl}/gummy-pollo.svg">
                 </div>
               </div><!--row-->
               <div class="row">
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-13" onclick="addGummy('13')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-13" onclick="addCharm('13', 'gummy')">
                   <img src="${assetsUrl}/gummy-cherry.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-14" onclick="addGummy('14')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-14" onclick="addCharm('14', 'gummy')">
                   <img src="${assetsUrl}/gummy-fuego.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-15" onclick="addGummy('15')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-15" onclick="addCharm('15', 'gummy')">
                   <img src="${assetsUrl}/gummy-pepinillo.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-16" onclick="addGummy('16')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-16" onclick="addCharm('16', 'gummy')">
                   <img src="${assetsUrl}/gummy-hotdog-rojo.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-17" onclick="addGummy('17')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-17" onclick="addCharm('17', 'gummy')">
                   <img src="${assetsUrl}/gummy-hotdog-amarillo.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-18" onclick="addGummy('18')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-18" onclick="addCharm('18', 'gummy')">
                   <img src="${assetsUrl}/gummy-galleta.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-19" onclick="addGummy('19')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-19" onclick="addCharm('19', 'gummy')">
                   <img src="${assetsUrl}/gummy-llave-amarilla.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-20" onclick="addGummy('20')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-20" onclick="addCharm('20', 'gummy')">
                   <img src="${assetsUrl}/gummy-candado-amarillo.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-21" onclick="addGummy('21')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-21" onclick="addCharm('21', 'gummy')">
                   <img src="${assetsUrl}/gummy-llave-dorada.svg">
                 </div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-22" onclick="addGummy('22')">
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-22" onclick="addCharm('22', 'gummy')">
                   <img src="${assetsUrl}/gummy-candado-dorado.svg">
                 </div>
               </div><!-- row-->
@@ -665,8 +574,8 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
       <input type="text" id="values-collar-size" value="default"><br>
       <label for="values-collar-color">Color Gummys</label><br>
       <input type="text" id="values-gummys-color" value="default"><br>
-      <label for="values-gummys-number">NÃºmero de gummys</label><br>
-      <input type="number" id="values-gummys-number" value="0"><br>
+      <label for="values-charms-number">NÃºmero de gummys</label><br>
+      <input type="number" id="values-charms-number" value="0"><br>
     </div>`
 
 
@@ -761,7 +670,7 @@ function switchCustomizer(id, isFirst = true) {
       changeKeysColor('color11')
       // document.querySelector(`input[value='5']+label`).click()
       //detectar el numero de digitos del telefono
-      document.querySelector('#phone').addEventListener('input', updateCharms)
+      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       if (isFirst) enableBuyButton(false)
       document.querySelector('#charmsCode').value = ""
       break;
@@ -780,7 +689,7 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('.size-xs .medidas').textContent = '20-33cm';
       // document.querySelector(`input[value='5']+label`).click()
       //detectar el numero de digitos del telefono
-      document.querySelector('#phone').addEventListener('input', updateCharms)
+      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       if (isFirst) enableBuyButton(false)
       document.querySelector('#charmsCode').value = ""
       break;
@@ -803,7 +712,7 @@ function switchCustomizer(id, isFirst = true) {
       changeCollarColor('collar1', 'Naranja Neon', false)
       // document.querySelector(`input[value='5']+label`).click()
       //detectar el numero de digitos del telefono
-      document.querySelector('#phone').addEventListener('input', updateCharms)
+      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       changeKeysColor('color11')
       if (isFirst) enableBuyButton(false)
       break;
@@ -825,43 +734,13 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('.new-color-keyboard').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "flex"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
-      document.querySelector('#phone').addEventListener('input', updateCharms)
+      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       document.querySelector('#personalize').innerHTML = "Personaliza tus charms"
       changeCollarSize('xs', 'values-collar-size', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color1')
       minCharms = 1
       maxCharms = 100
-      break;
-    case 91177851291934: //charms-extra - dev
-      myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15]]
-      wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-      document.querySelector('.size-s').style.display = "none"
-      document.querySelector('.size-m').style.display = "none"
-      document.querySelector('.size-l').style.display = "none"
-      document.querySelector('.size-xl').style.display = "none"
-      /*document.querySelector('#size-title').style.display="none"          
-      document.querySelector('#size-container').style.display="none"          */
-      // document.querySelector('.collar-title').style.display = "none"
-      document.querySelector('.color-collar').style.display = "none"
-      // document.querySelector('.collar').style.display = "none"
-      // document.querySelector('.elije-charms').style.display = "none"
-      document.querySelector('#charm-container').classList.add('charms-sueltos')
-      document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#color22').classList.remove('hidden') /*Activar charms Conffetti */
-      // document.querySelector('#color23').classList.add('hidden') /*Desactivar color aqua*/
-      document.querySelector('.medidas').style.display = "none"
-      document.querySelector('#size-title').innerHTML = "01: Elige el tamaño de tus charms"
-      // document.querySelector('#personalize').innerHTML="02: Personaliza tus charms (hasta 19 pz)"
-      changeCollarSize('sml', 'values-collar-size', false)
-      if (isFirst) enableBuyButton(false)
-      changeKeysColor('color11')
-      minCharms = 1
-      maxCharms = 19
-      // document.getElementById('min-charms').style.display = "none"
       break;
     case 7319719280790: //charms-extra
       myLog(currentSlug)
@@ -885,7 +764,7 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('#keyboard-title').innerHTML = "02: Personaliza tus charms (hasta 19 pz)"
       document.querySelector('#instruction-charms').innerHTML = "¿Quieres más de 19 pz? Solo crea otro carrito 🛒"
       document.querySelector('#instruction-charms').style.fontSize = "1.1rem"
-      document.querySelector('#phone').addEventListener('input', updateCharms)
+      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       changeCollarSize('sml', 'values-collar-size', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
@@ -1041,7 +920,7 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('.color-keyboard').style.display = "none"
       document.querySelector('.new-color-keyboard').style.display = "none"
       document.querySelector('.size-xs .medidas').textContent = '20-33cm';
-      document.querySelector('#phone').addEventListener('input', updateCharms)
+      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       changeCollarSize('xs', 'values-collar-size', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color10')
@@ -1062,33 +941,33 @@ function switchCustomizer(id, isFirst = true) {
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color22')
       //detectar el numero de digitos del telefono
-      document.querySelector('#phone').addEventListener('input', updateCharms)
+      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       // document.querySelector(`input[value='5']+label`).click()
       if (isFirst) enableBuyButton(false)
       break;
-    case 9117784867049: //collar-de-gummies
-      myLog('Inicializando collar de gummys')
-      wawasContainer.innerHTML = gummysKeyboardHTML
-      window.$gummyColor = document.querySelector('#values-gummys-color')
-      window.$qtyGummies = document.querySelector('#values-gummys-number')
-      // document.querySelector('#collar-title').innerHTML = "02: Elije tus 7 gummies"
-      $gummyColor.value = 'rojo'
-      changeCollarSize('xs', 'values-collar-size', 'gummy', false)
-      break;
     case 7634477645974: //collar-de-gummies
       myLog('Inicializando collar de gummys')
-      wawasContainer.innerHTML = gummysKeyboardHTML
-      window.$gummyColor = document.querySelector('#values-gummys-color')
-      window.$qtyGummies = document.querySelector('#values-gummys-number')
-      $gummyColor.value = 'rojo'
-      changeCollarSize('xs', 'values-collar-size', 'gummy', false)
+      minCharms = 7;
+      maxCharms = 7;
+      $charmsArray = [[9, 'rojo'], ['G', 'rojo'], ['U', 'rojo'], ['M', 'rojo'], ['M', 'rojo'], [8, 'rojo'], [8, 'rojo']];
+      wawasContainer.innerHTML = gummysKeyboardHTML;
+      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray, 'gummy');
+      window.$gummyColor = document.querySelector('#values-gummys-color');
+      window.$qtyGummies = document.querySelector('#values-charms-number');
+      $gummyColor.value = 'rojo';
+      changeCollarSize('xs', 'values-collar-size', 'gummy', false);
       break;
     default:
       break;
   }
 }
 
-//Shared functions
+/*
+
+--- SHARED FUNCTIONS ---
+
+*/
+
 function enableBuyButton(enabled) {
   enabled ? buyButton.removeAttribute('disabled') : buyButton.setAttribute('disabled', true)
 }
@@ -1228,63 +1107,80 @@ async function getCart() {
   return y
 }
 
-//Charms functions
-function updateCharms(caller) {
+/*
+
+--- CHARMS FUNCTIONS ---
+
+*/
+
+function updateCharmsQty(caller, collarType = 'og') {
+// Esta función se utiliza para seleccionar la variante de qty de charms
+// Según el collar se implementaron funciones distintas
   debug.logCaller(caller);
-  document.querySelector('#values-charms-number').value = $charmsArray.length;
-  // if (currentSlug == 'charms-extra' || currentSlug == 'charms-extra-xs') {
-  //   document.querySelector('.quantity__input').value = $charmsArray.length
-  // } else {
-  if ($charmsArray.length < minCharms) {
-    document.querySelector(`input[value='${5}']+label`).click();
-  }
-  if ($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms && document.querySelector(`input[value='${$charmsArray.length}']+label`)) {
-    document.querySelector(`input[value='${$charmsArray.length}']+label`).click()
-  }
-  // }
 
+  const charmsQty = $charmsArray.length;
+  let collarSize;
 
+  if (collarType === 'og') {
+    document.querySelector('#values-charms-number').value = charmsQty;
 
-  try {
-    const variantSelects = document.querySelector('variant-selects');
-
-    // Buscar el radio marcado del grupo "Tamaño"
-    const tamañoChecked = variantSelects.querySelector('input[name^="Tamaño"]:checked');
-    const size = document.querySelector('#values-collar-size').value
-    if (tamañoChecked?.value && (tamañoChecked?.value != size)) {
-      document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
+    if (charmsQty < minCharms) {
+      document.querySelector(`input[value='${minCharms}']+label`).click();
+    } else if (charmsQty >= minCharms &&
+              charmsQty <= maxCharms &&
+              document.querySelector(`input[value='${charmsQty}']+label`)) {
+      // Select qty variant
+      document.querySelector(`input[value='${charmsQty}']+label`).click()
     }
-  } catch (err) {
-    console.log(err)
+    try {
+      const variantSelects = document.querySelector('variant-selects');
+  
+      // Buscar el radio marcado del grupo "Tamaño"
+      const tamañoChecked = variantSelects.querySelector('input[name^="Tamaño"]:checked');
+      const size = document.querySelector('#values-collar-size').value
+      if (tamañoChecked?.value && (tamañoChecked?.value != size)) {
+        document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
+      }
+    } catch (err) {
+      console.log(err)
+    }
+
+    // Avanzar el termometro del telefono
+    let phoneDigits = document.querySelector('#phone').value.length
+    document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%'
+    document.querySelector('#phone-level').style.background = phoneDigits == 10 ? 'green' : 'red'
+    myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits)
+    
+    // Pasa los datos del collar a las propiedades de producto en Shopify
+    collarSize = document.querySelector('#values-collar-size').value;
+    let collarColor = document.querySelector('#values-collar-color').value;
+    let collarPhone = (document.querySelector('#phone').value) ? document.querySelector('#phone').value : 'N/A';
+    passProductProperties(idProduct, collarSize, collarColor, $charmsArray, collarPhone);
+
+  } else if (collarType === 'gummy') {
+    document.querySelector('#values-charms-number').value = charmsQty;
+    collarSize = document.querySelector('#values-collar-size').value;
+
+    passProductProperties(idProduct, collarSize, null, $charmsArray, null, collarType);
   }
 
-  //avanzar el termometro del telefono
-  let phoneDigits = document.querySelector('#phone').value.length
-  document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%'
-  document.querySelector('#phone-level').style.background = phoneDigits == 10 ? 'green' : 'red'
-  myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits)
-  
+  // Desbloquear compras si los charms son >= que el minimo, <= maximo, si los digitos del telefono son 10 
+  console.log("Array length = ", $charmsArray.length);
 
-  // Pasa los datos del collar a las propiedades de producto en Shopify
-  let collarSize = document.querySelector('#values-collar-size').value;
-  let collarColor = document.querySelector('#values-collar-color').value;
-  let collarPhone = (document.querySelector('#phone').value) ? document.querySelector('#phone').value : 'N/A';
-  passProductProperties(idProduct, collarSize, collarColor, $charmsArray, collarPhone);
+  if (collarType === 'og'){
+    if ((charmsQty >= minCharms && charmsQty <= maxCharms) && ((phoneDigits == 10 && phonecharm) || !phonecharm) && (!firstClick)) {
+      myLog('Compras desbloqueadas')
+      enableBuyButton(true);
+    } else {
+      myLog('Compras bloqueadas')
+      enableBuyButton(false);
+    }
 
-  // if ($gummiesArray.length !== 0) {
-  //   document.querySelector('#charmsCode').value = general + passProductProperties(idProduct, $charmsArray) + displayGummies($gummiesArray)
-  // } else {
-  //   document.querySelector('#charmsCode').value = general + passProductProperties(idProduct, $charmsArray)
-  // }
-
-  //desbloquear compras si los charms son >= que el minimo, <= maximo, si los digitos del telefono son 10 
-  console.log("Array length = ", $charmsArray.length)
-  if (($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms) && ((phoneDigits == 10 && phonecharm) || !phonecharm) && (!firstClick)) {
-    myLog('Compras desbloqueadas')
-    enableBuyButton(true)
+  // En cambio si el collar es gummy solamente hay que revisar que sean 7 charms
+  } else if (collarType === 'gummy' && !firstClick && charmsQty === minCharms && charmsQty === maxCharms) {
+    enableBuyButton(true);
   } else {
-    myLog('Compras bloqueadas')
-    enableBuyButton(false)
+    enableBuyButton(false);
   }
 
   // document.querySelector('#values-collar-color').value
@@ -1300,68 +1196,93 @@ function updateCharms(caller) {
     'Cafe': '9'
   };
 
-  collarColor = collarMap[document.querySelector('#values-collar-color').value] || ''
+  if (collarType === 'og') {
+    collarColor = collarMap[document.querySelector('#values-collar-color').value] || ''
+
+    const data = {
+      cS: document.querySelector('#values-collar-size').value || "NA",
+      c: collarColor,
+      ch: encodeCharms($charmsArray),
+      p: collarPhone || "NA"
+    }
+  
+    debug.log(JSON.stringify(data))
+    const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(data));
+    document.querySelector('#imageProduct').value = `https://wwsmx.com/revelador.html?data=${compressed}`
+  }
 
   nextBtn()
-
-  const data = {
-    cS: document.querySelector('#values-collar-size').value || "NA",
-    c: collarColor,
-    ch: encodeCharms($charmsArray),
-    p: collarPhone || "NA"
-  }
-
-  console.log(JSON.stringify(data))
-  const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(data));
-  document.querySelector('#imageProduct').value = `https://wwsmx.com/revelador.html?data=${compressed}`
-
 }
 
 
-function emptyCharms() {
+function emptyCharms(collarType = 'og') {
   $charmsArray = [];
+  if (collarType === 'og') {
+    document.querySelector('#phone').value = ''
+    phonecharm = false
+    document.querySelector('#phone').style.display = 'none'
+    document.querySelector('#phone-title').style.display = 'none'
+    document.querySelector('#phone-level').style.display = 'none'
+    updateCharmsQty('emptyCharms')
+  }
+  
   document.querySelector('#values-charms-number').value = 0
-  document.querySelector('#phone').value = ''
-  phonecharm = false
-  document.querySelector('#phone').style.display = 'none'
-  document.querySelector('#phone-title').style.display = 'none'
-  document.querySelector('#phone-level').style.display = 'none'
   document.querySelector('#charm-container').innerHTML = ''
-  updateCharms('emptyCharms')
+  if (collarType === 'gummy') updateCharmsQty('emptyCharms', 'gummy');
 }
 
-function addCharm(charm) {
+function addCharm(charm, collarType = 'og') {
   if (firstClick) {
     firstClick = false
-    emptyCharms()
+    emptyCharms(collarType)
   }
-  if ($charmsArray.length < maxCharms) {
-    $charmsArray.push([charm, currentColor])
-    document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-    if (charm == '#') {
-      phonecharm = true
-      phoneNumber = document.querySelector('#phone').value
-      document.querySelector('#phone').style.display = ''
-      document.querySelector('#phone-title').style.display = ''
-      document.querySelector('#phone-level').style.display = ''
-      //document.querySelector(`input[value='Con']+label`).click()
-
+  if (collarType === 'og') {
+    if ($charmsArray.length < maxCharms) {
+      $charmsArray.push([charm, currentColor]);
+      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray);
+      if (charm == '#') {
+        phonecharm = true
+        phoneNumber = document.querySelector('#phone').value
+        document.querySelector('#phone').style.display = ''
+        document.querySelector('#phone-title').style.display = ''
+        document.querySelector('#phone-level').style.display = ''
+      }
     }
+  } else if (collarType === 'gummy') {
+    if ($charmsArray.length < maxCharms) {
+      $charmsArray.push([charm, $gummyColor.value]);
+      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray, 'gummy');
+      
+    } else {
+      console.log('Demasiados gummies');
+    }
+  } else {
+    console.error('Unknown keyboard type');
   }
-  updateCharms('addCharm')
+  updateCharmsQty('addCharm', collarType);
 }
-function renderCharms(array) {
+
+function renderCharms(charmsArray, collarType = 'og') {
   let html = ''
   let phone = false
-  for (let j = 0; j < array.length; j++) {
-    if (array[j][0] != '#') {
-      html = html + '<span class="color' + (array[j][1]) + '" onclick="deleteCharm(' + j + ')">' + array[j][0] + '</span>'
+  charmsArray.forEach((item, index) =>{
+    if (collarType === 'og') {
+      if (item[0] !== '#') {
+        html += `<span class="color${item[1]}" onclick=deleteCharm(${index})>${item[0]}</span>`;
+      } else if (collarType === 'og') {
+        phone = true;
+      }
+    } else if (collarType === 'gummy') {
+      const gummyCharmValue = document.querySelector(`#gummyKey-${item[0]}`).innerHTML;
+      html += `<div id="gummy-${item[0]}" class="gummy gummy-color-${item[1]}" onclick=deleteCharm(${index})>${gummyCharmValue}</div>`;
+      document.querySelector('#charm-container').innerHTML = html;
     } else {
-      phone = true
+      console.error('Type of keyboard not known');
     }
-  }
+  });
+
   if (phone) {
-    html = html + '<span onclick="deletePhone()"><img class="phone-charm" src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" alt="phone charm"></span>'
+    html += '<span onclick="deletePhone()"><img class="phone-charm" src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" alt="phone charm"></span>'
   }
 
   return html
@@ -1373,17 +1294,17 @@ function changeCollarColor(clave, color, update = true) {
   $collar.classList.add(clave)
   document.querySelector('#values-collar-color').value = color
   if (document.querySelector(`input[value='${color}']+label`)) document.querySelector(`input[value='${color}']+label`).click()
-  if (update) updateCharms('changeCollarColor')
+  if (update) updateCharmsQty('changeCollarColor')
 
 }
 
 function changeKeysColor(color) {
-  const $keys = document.querySelectorAll('.charms-keyboard .keyboard_key_lastrow')
+  const $keys = document.querySelectorAll('.charms-keyboard .keyboard-key')
 
   for (const key of $keys) {
     if (key.id != "charm-key-phone") {
       key.setAttribute('class', '')
-      key.classList.add('keyboard_key_lastrow', color)
+      key.classList.add('keyboard-key', color)
     }
   }
   currentColor = parseInt(color.slice(5))
@@ -1391,15 +1312,15 @@ function changeKeysColor(color) {
 
 }
 
-function deleteCharm(charm) {
+function deleteCharm(charm, collarType = 'og') {
   if (firstClick) {
     firstClick = false
-    emptyCharms()
+    emptyCharms(collarType)
   } else {
     $charmsArray.splice(charm, 1)
     document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
     myLog(charm + ' eliminado')
-    updateCharms('deleteCharm')
+    updateCharmsQty('deleteCharm')
   }
 }
 
@@ -1418,7 +1339,7 @@ function deletePhone() {
   //document.querySelector(`input[value='Sin']+label`).click()
   console.log('telefono eliminado')
   phonecharm = false
-  updateCharms('deletePhone')
+  updateCharmsQty('deletePhone')
 }
 
 function changeCollarSize(size, sizeIdTag, collarType = 'og', update = true) {
@@ -1439,7 +1360,7 @@ function changeCollarSize(size, sizeIdTag, collarType = 'og', update = true) {
     console.error(`querySelector did not find input[value='${size.toUpperCase()}']+label`);
     console.error(`FALTA IMPLEMENTAR TAMAÑOS A COLLAR GUMMIES`);
   }
-  if (collarType !== 'gummy' && update) updateCharms('changeCollarSize')
+  if (collarType !== 'gummy' && update) updateCharmsQty('changeCollarSize')
   //desaparecer color dorado en charms xs
   if ((currentSlug == "charms-extra" && size == 'xs') || (currentSlug == "collar-para-charms" && size == 'xs')) {
     document.querySelector('#color21').style.display = "none"
@@ -1451,8 +1372,8 @@ function changeCollarSize(size, sizeIdTag, collarType = 'og', update = true) {
   }
 }
 
-function passProductProperties(productId, collarSize, collarColor, charmsArray, phoneCharm = 'N/A') {
-  debug.logPassedItems(productId, collarColor, charmsArray, phoneCharm);
+function passProductProperties(productId, collarSize = 'N/A', collarColor = 'N/A', charmsArray, phoneCharm = 'N/A', collarType = 'og') {
+  debug.logPassedItems(productId, collarSize, collarColor, charmsArray, phoneCharm, collarType);
 
   document.querySelector('#collarColor').value = collarColor;
   
@@ -1543,38 +1464,6 @@ function numberToHex(num) {
 
 //Gummys functions
 
-function emptyGummies() {
-  document.querySelector('#gummies-container').innerHTML = ''
-}
-
-function addGummy(letter) {
-  if ($gummiesArray.length < maxGummys) {
-    myLog('addGummy:' + letter + ' ' + $gummyColor.value)
-    $gummiesArray.push([letter, $gummyColor.value])
-    renderGummies($gummiesArray)
-    $qtyGummies.value = $gummiesArray.length
-    updateGummys('addGummy')
-  } else {
-    myLog('demasiados gummies')
-  }
-  ($gummiesArray.length >= maxGummys && $gummiesArray.length <= minGummys) ? enableBuyButton(true) : enableBuyButton(false)
-}
-
-function renderGummies(gummiesArray) {
-  emptyGummies()
-  for (let [index, gummyElement] of gummiesArray.entries()) {
-    gummy = document.createElement('div')
-    gummy.setAttribute('id', 'gummy-' + gummyElement[0])
-    gummy.setAttribute('class', 'gummy')
-    gummy.classList.add('gummy-color-' + gummyElement[1])
-    document.querySelector('#gummies-container').appendChild(gummy)
-    gummy.innerHTML = document.querySelector('#gummyKey-' + gummyElement[0]).innerHTML
-    /*gummy.querySelector('svg').removeAttribute('class')
-    gummy.querySelector('svg').classList.add('gummy-color-'+gummyElement[1])*/
-    gummy.setAttribute('onclick', 'deleteGummy(' + index + ')')
-  }
-}
-
 function deleteGummy(index) {
   $gummiesArray.splice(index, 1)
   renderGummies($gummiesArray)
@@ -1582,11 +1471,6 @@ function deleteGummy(index) {
   $qtyGummies.value = $gummiesArray.length
   updateGummys('deleteGummy');
   ($gummiesArray.length >= maxGummys && $gummiesArray.length <= minGummys) ? enableBuyButton(true) : enableBuyButton(false)
-}
-
-function updateGummys(caller) {
-  myLog(caller)
-  document.querySelector('#charmsCode').value = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
 }
 
 function changeGummiesColor(color) {
@@ -1604,20 +1488,6 @@ function changeGummiesColor(color) {
   currentGummyColor = color
   console.log('Color de Gummies: ' + currentGummyColor)
 }
-
-function displayGummies(array) {
-  let html = ''
-  for (let j = 0; j < array.length; j++) {
-    if (array[j][0] != '#') {
-      html = html + '<span class="gummy-color-' + array[j][1] + ' gummy-' + array[j][0] + '">' + array[j][0] + '</span>'
-    } else {
-      phone = true
-    }
-  }
-  return `<div id="gummies" style="padding:16px">${html}</div>`
-
-}
-
 
 /**
  * Convierte una cadena Data URI (ej: data:image/webp;base64,...) a un objeto Blob binario.
@@ -1747,13 +1617,13 @@ function renderStep() {
       changeCollarSize('s', 'values-collar-size', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
-      document.querySelector('#phone').addEventListener('input', updateCharms)
+      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       nextBtn();
     } else {
       keyborard = packKeyboard(gummysKeyboardHTML)
       wawasContainer.innerHTML = keyborard
       window.$gummyColor = document.querySelector('#values-gummys-color')
-      window.$qtyGummies = document.querySelector('#values-gummys-number')
+      window.$qtyGummies = document.querySelector('#values-charms-number')
       $gummyColor.value = 'rojo'
       changeCollarSize('xs', false, 'values-collar-size', 'gummy')
     }

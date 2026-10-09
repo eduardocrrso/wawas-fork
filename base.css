@@ -3848,7 +3848,7 @@ details-disclosure > details {
 }
 
 
-.keyboard_key_lastrow {
+.keyboard-key {
     font-size: 1.4em;
     border: solid 1px #ccc;
     border-radius: 8px;
