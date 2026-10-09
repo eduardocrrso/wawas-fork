@@ -3921,4 +3921,5 @@ div[id^=collar] {
 
 .gummy > img {
   height: 36px;
+  max-width: 90%;
 }
