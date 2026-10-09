@@ -1540,7 +1540,7 @@ function updateCharms(caller) {
 
     // Buscar el radio marcado del grupo "Tamaño"
     const tamañoChecked = variantSelects.querySelector('input[name^="Tamaño"]:checked');
-    const size = document.querySelector('#size').value
+    const size = document.querySelector('#values-collar-size').value
     if (tamañoChecked?.value && (tamañoChecked?.value != size)) {
       document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
     }
@@ -1741,6 +1741,18 @@ function passProductProperties(productId, collarSize, collarColor, charmsArray, 
 
   document.querySelector('#collarColor').value = collarColor;
   
+  let savePhoneCharm;
+  charmsArray.forEach((item, index) => {
+    if (item[0] === '#' && !(index === charmsArray - 1)) {
+      savePhoneCharm = item;
+      charmsArray.splice(index, 1);
+    }
+    if (savePhoneCharm) {
+      charmsArray.push(savePhoneCharm);
+    }
+  });
+  console.log(JSON.stringify(charmsArray));
+
   let charmsSimplified = [];
   const abc = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
   charmsArray.forEach((item) => {
