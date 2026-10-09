@@ -614,7 +614,6 @@ function customizer(id) {
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.type = 'text/css';
-  link.href = 'https://wwsmx.com/styleWawasv2.css';
   document.head.appendChild(link);
   //adjuntar html2canvas 
   let scriptDom = document.createElement('script')
