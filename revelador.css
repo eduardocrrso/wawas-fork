@@ -716,7 +716,7 @@ input[id^='color'] {
 #phone-level {
     background: red;
     height: 4px;
-    width: 10%;
+    width: 0;
     margin-bottom: 40px;
     transition: all .5s ease-out;
     position: relative;

@@ -9,26 +9,21 @@ Change debugActive to 'true' to activate debugger over the whole code.
 const debug = {
   debugActive: true,
 
-  logProductId: (debugActive) => {
-    if (debug) console.log("idProduct:", idProduct);
-  },
-
-  logPassedItems: (...allItems) => {
-    if (!debug) return;
-    console.log(allItems);
+  logProductId: () => {
+    if (debug.debugActive) console.log("idProduct:", idProduct);
   },
 
   logCaller: (caller) => {
-    if (debug) console.log('Caller: ' + caller);
+    if (debug.debugActive) console.log('Caller: ' + caller);
   },
-  log: (...anything) => {
-    console.log(anything);
+
+  logItems: (caller, ...anything) => {
+    if (debug.debugActive) console.log(`Caller ${caller}:`, anything);
   }
 }
 
 //ids de producto activas
 const instances = [
-  { id: 9117785129193, class: 'collar-para-charms' },// copia dev
   { id: 7340949438614, class: 'collar-para-charms' },
   { id: 7412912783510, class: 'collar-de-charms-mini' },
   { id: 7820838174870, class: 'charms-extra-xs' },
@@ -43,6 +38,8 @@ const instances = [
   { id: 9120268222697, class: 'packs' }, // packs
   { id: 8289135952022, class: 'llavero-de-charms' },
 ];
+
+debug.logCaller('personalizador.js');
 
 //obtener el id del producto
 const idProduct = __st.rid;
@@ -69,8 +66,8 @@ const assetsUrl = currentUrl.includes("github") || currentUrl.includes("127.0") 
 
 document.addEventListener('DOMContentLoaded', function () {
   if (instances.some(product => product.id === idProduct)) {
-    console.log('Powered by Pixelemos ðŸ’œ')
-    customizer(idProduct)
+    debug.logCaller('DOMContentLoaded');
+    customizer(idProduct);
 
     const steps = document.querySelectorAll(".step");
 
@@ -132,14 +129,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   } else {
-    console.log('Powered by Pixelemos ðŸ¤')
+    console.log('else case')
+  }
+
+  debug.logCaller('DOMContentLoaded');
+
+  const collarsWithPhoneCharm = [
+    7340949438614, // Collar para mascotas de charms
+    8582499074198, // Collar para mascotas funfetti
+    7484253372566, // Collar para mascotas glow in the dark
+  ];
+
+  if (collarsWithPhoneCharm.includes(idProduct)) {
+    const phoneIpnut = document.querySelector('#phone');
+    phoneIpnut.addEventListener('input', updatePhone, false);
   }
 }, false);
 
 // Init vars
-//const allowedSlugs = ['collar-de-charms','collar-de-charms-mini','charms-extra','collar-de-charms-glow-in-the-dark','charms-prueba','pechera-y-correa-para-mascota-de-charms','charms-extra-xs','correa-de-charms','correa-para-gato-y-razas-chicas']
-//const allowedSlugs = ['collar-de-charms','collar-de-charms-mini','collar-de-charms-glow-in-the-dark','charms-prueba','pechera-y-correa-para-mascota-de-charms','charms-extra-xs','correa-de-charms']
-//const currentSlug = window.location.pathname.split('/')[2]
 const currentSlug = instances.find(instance => instance.id === idProduct).class;
 const buyButton = document.querySelector('[id^="ProductSubmitButton"]')
 const quantityInput = document.querySelector('[id^="Quantity-Form-template"]')
@@ -653,6 +660,7 @@ function customizer(id) {
 }
 
 function switchCustomizer(id, isFirst = true) {
+  if (isFirst) enableBuyButton(false);
 
   switch (id) {
     case 7340949438614: //collar-de-charms
@@ -667,10 +675,6 @@ function switchCustomizer(id, isFirst = true) {
       changeCollarSize('xs', 'values-collar-size', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
-      // document.querySelector(`input[value='5']+label`).click()
-      //detectar el numero de digitos del telefono
-      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
-      if (isFirst) enableBuyButton(false)
       document.querySelector('#charmsCode').value = ""
       break;
     case 9117785129193: //collar-de-charms
@@ -686,10 +690,6 @@ function switchCustomizer(id, isFirst = true) {
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
       document.querySelector('.size-xs .medidas').textContent = '20-33cm';
-      // document.querySelector(`input[value='5']+label`).click()
-      //detectar el numero de digitos del telefono
-      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
-      if (isFirst) enableBuyButton(false)
       document.querySelector('#charmsCode').value = ""
       break;
     case 7412912783510: //collar-de-charms-mini
@@ -709,11 +709,7 @@ function switchCustomizer(id, isFirst = true) {
       // passProductProperties(idProduct, $charmsArray)
       changeCollarSize('xs', 'values-collar-size', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
-      // document.querySelector(`input[value='5']+label`).click()
-      //detectar el numero de digitos del telefono
-      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       changeKeysColor('color11')
-      if (isFirst) enableBuyButton(false)
       break;
     case 7820838174870: //charms-extra-xs
       myLog(currentSlug)
@@ -733,10 +729,8 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('.new-color-keyboard').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "flex"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
-      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       document.querySelector('#personalize').innerHTML = "Personaliza tus charms"
       changeCollarSize('xs', 'values-collar-size', false)
-      if (isFirst) enableBuyButton(false)
       changeKeysColor('color1')
       minCharms = 1
       maxCharms = 100
@@ -763,9 +757,7 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('#keyboard-title').innerHTML = "02: Personaliza tus charms (hasta 19 pz)"
       document.querySelector('#instruction-charms').innerHTML = "¿Quieres más de 19 pz? Solo crea otro carrito 🛒"
       document.querySelector('#instruction-charms').style.fontSize = "1.1rem"
-      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       changeCollarSize('sml', 'values-collar-size', false)
-      if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 1
       maxCharms = 19
@@ -785,17 +777,11 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('.size-xs .medidas').textContent = '22-28cm';
       document.querySelector('.size-xl').style.display = "none"
-      // document.querySelector('.collar-title').style.display = "none"
       document.querySelector('#color-title').style.display = "none"
       document.querySelector('#color-step').style.display = "none"
-
-      // document.querySelector('.color-collar').style.display = "none"
       document.querySelector('.collar').style.display = "none"
-      // document.querySelector('.elije-charms').style.display = "none"
-
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       changeCollarSize('xs', 'values-collar-size', false)
-      if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 15
       maxCharms = 15
@@ -823,9 +809,7 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector("#color-title").style.display = "none"
       document.querySelector('#keyboard-title').innerHTML = "01: Comienza a personalizar <br> tu correa (15 charms)"
       document.querySelector('#instruction-charms').innerHTML = "Elige unicamente 15 charms"
-      //
       changeCollarSize('s', 'values-collar-size', false)
-      if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 15
       maxCharms = 15
@@ -854,7 +838,6 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('#keyboard-title').innerHTML = "01: Comienza a personalizar <br> tu correa (15 charms)"
       document.querySelector('#instruction-charms').innerHTML = "Elige unicamente 15 charms"
       changeCollarSize('s', 'values-collar-size', false)
-      if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 15
       maxCharms = 15
@@ -880,34 +863,9 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('#keyboard-title').innerHTML = "01: Comienza a personalizar  <br> tu llavero (6 charms)"
       document.querySelector('#instruction-charms').innerHTML = " Agrega unicamente 6 charms"
       changeCollarSize('s', 'values-collar-size', false)
-      if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 6
       maxCharms = 6
-      break;
-    case 9120268222697: //llavero-de- testttttttt
-      myLog(currentSlug)
-      document.querySelector("form[id^='product-form-template-'] .product-form__buttons").style.display = "none";
-      // primer elemento
-      isPack = true;
-      $steps = [
-        {
-          id: 1,
-          stepName: "Personaliza tu collar",
-          keyboardType: "charms",
-          minCharms: 5,
-          maxCharms: 9,
-        },
-        {
-          id: 2,
-          stepName: "Personaliza tu llavero",
-          keyboardType: "gummies",
-          minCharms: 5,
-          maxCharms: 9,
-        }
-      ]
-      renderStep()
-
       break;
     case 7484253372566: //collar-de-charms-glow-in-the-dark
       myLog(currentSlug)
@@ -919,12 +877,9 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('.color-keyboard').style.display = "none"
       document.querySelector('.new-color-keyboard').style.display = "none"
       document.querySelector('.size-xs .medidas').textContent = '20-33cm';
-      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
       changeCollarSize('xs', 'values-collar-size', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color10')
-      // document.querySelector(`input[value='5']+label`).click()
-      if (isFirst) enableBuyButton(false)
       break;
     case 8582499074198: //collar-de-charms-conffeti
       myLog(currentSlug)
@@ -939,10 +894,6 @@ function switchCustomizer(id, isFirst = true) {
       changeCollarSize('xs', 'values-collar-size', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color22')
-      //detectar el numero de digitos del telefono
-      document.querySelector('#phone').addEventListener('input', updateCharmsQty)
-      // document.querySelector(`input[value='5']+label`).click()
-      if (isFirst) enableBuyButton(false)
       break;
     case 7634477645974: //collar-de-gummies
       myLog('Inicializando collar de gummys')
@@ -1112,13 +1063,15 @@ async function getCart() {
 
 */
 
-function updateCharmsQty(caller, collarType = 'og') {
-// Esta función se utiliza para seleccionar la variante de qty de charms
-// Según el collar se implementaron funciones distintas
-  debug.logCaller(caller);
+function updateCharmsQty(caller = null, collarType = 'og') {
+  // Esta función se utiliza para seleccionar la variante de qty de charms
+  // Según el collar se implementaron funciones distintas
+  debug.logItems('updateCharmsQty', 'called by:', caller);
 
   const charmsQty = $charmsArray.length;
   let collarSize;
+  let collarPhone;
+  let phoneDigits;
 
   if (collarType === 'og') {
     document.querySelector('#values-charms-number').value = charmsQty;
@@ -1126,35 +1079,33 @@ function updateCharmsQty(caller, collarType = 'og') {
     if (charmsQty < minCharms) {
       document.querySelector(`input[value='${minCharms}']+label`).click();
     } else if (charmsQty >= minCharms &&
-              charmsQty <= maxCharms &&
-              document.querySelector(`input[value='${charmsQty}']+label`)) {
+      charmsQty <= maxCharms &&
+      document.querySelector(`input[value='${charmsQty}']+label`)) {
       // Select qty variant
-      document.querySelector(`input[value='${charmsQty}']+label`).click()
+      document.querySelector(`input[value='${charmsQty}']+label`).click();
     }
     try {
       const variantSelects = document.querySelector('variant-selects');
-  
+
       // Buscar el radio marcado del grupo "Tamaño"
       const tamañoChecked = variantSelects.querySelector('input[name^="Tamaño"]:checked');
-      const size = document.querySelector('#values-collar-size').value
+      const size = document.querySelector('#values-collar-size').value;
       if (tamañoChecked?.value && (tamañoChecked?.value != size)) {
-        document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
+        document.querySelector(`input[value='${size.toUpperCase()}']+label`).click();
       }
     } catch (err) {
       console.log(err)
     }
 
-    // Avanzar el termometro del telefono
-    let phoneDigits = document.querySelector('#phone').value.length
-    document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%'
-    document.querySelector('#phone-level').style.background = phoneDigits == 10 ? 'green' : 'red'
-    myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits)
-    
     // Pasa los datos del collar a las propiedades de producto en Shopify
     collarSize = document.querySelector('#values-collar-size').value;
     let collarColor = document.querySelector('#values-collar-color').value;
-    let collarPhone = (document.querySelector('#phone').value) ? document.querySelector('#phone').value : 'N/A';
+    collarPhone = (document.querySelector('#phone').value) ? document.querySelector('#phone').value : 'N/A';
     passProductProperties(idProduct, collarSize, collarColor, $charmsArray, collarPhone);
+
+    if (collarPhone) {
+      updatePhone();
+    }
 
   } else if (collarType === 'gummy') {
     document.querySelector('#values-charms-number').value = charmsQty;
@@ -1164,18 +1115,18 @@ function updateCharmsQty(caller, collarType = 'og') {
   }
 
   // Desbloquear compras si los charms son >= que el minimo, <= maximo, si los digitos del telefono son 10 
-  console.log("Array length = ", $charmsArray.length);
+  debug.logItems('updateCharmsQty', "Charms array length = ", charmsQty);
 
-  if (collarType === 'og'){
-    if ((charmsQty >= minCharms && charmsQty <= maxCharms) && ((phoneDigits == 10 && phonecharm) || !phonecharm) && (!firstClick)) {
-      myLog('Compras desbloqueadas')
+  if (collarType === 'og') {
+    if ((charmsQty >= minCharms && charmsQty <= maxCharms) && ((phoneDigits === 10 && phonecharm) || !phonecharm) && (!firstClick)) {
+      debug.logItems('updateCharmsQty', 'Compras desbloqueadas')
       enableBuyButton(true);
     } else {
-      myLog('Compras bloqueadas')
+      debug.logItems('updateCharmsQty', 'Compras bloqueadas')
       enableBuyButton(false);
     }
 
-  // En cambio si el collar es gummy solamente hay que revisar que sean 7 charms
+    // En cambio si el collar es gummy solamente hay que revisar que sean 7 charms
   } else if (collarType === 'gummy' && !firstClick && charmsQty === minCharms && charmsQty === maxCharms) {
     enableBuyButton(true);
   } else {
@@ -1204,8 +1155,8 @@ function updateCharmsQty(caller, collarType = 'og') {
       ch: encodeCharms($charmsArray),
       p: collarPhone || "NA"
     }
-  
-    debug.log(JSON.stringify(data))
+
+    debug.logItems('updateCharmsQty', JSON.stringify(data))
     const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(data));
     document.querySelector('#imageProduct').value = `https://wwsmx.com/revelador.html?data=${compressed}`
   }
@@ -1224,7 +1175,7 @@ function emptyCharms(collarType = 'og') {
     document.querySelector('#phone-level').style.display = 'none'
     updateCharmsQty('emptyCharms')
   }
-  
+
   document.querySelector('#values-charms-number').value = 0
   document.querySelector('#charm-container').innerHTML = ''
   if (collarType === 'gummy') updateCharmsQty('emptyCharms', 'gummy');
@@ -1239,19 +1190,19 @@ function addCharm(charm, collarType = 'og') {
     if ($charmsArray.length < maxCharms) {
       $charmsArray.push([charm, currentColor]);
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray);
-      if (charm == '#') {
+      if (charm === '#') {
         phonecharm = true
-        phoneNumber = document.querySelector('#phone').value
-        document.querySelector('#phone').style.display = ''
-        document.querySelector('#phone-title').style.display = ''
-        document.querySelector('#phone-level').style.display = ''
+        phoneNumber = document.querySelector('#phone').value;
+        document.querySelector('#phone').style.display = '';
+        document.querySelector('#phone-title').style.display = '';
+        document.querySelector('#phone-level').style.display = '';
       }
     }
   } else if (collarType === 'gummy') {
     if ($charmsArray.length < maxCharms) {
       $charmsArray.push([charm, $gummyColor.value]);
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray, 'gummy');
-      
+
     } else {
       console.log('Demasiados gummies');
     }
@@ -1262,9 +1213,9 @@ function addCharm(charm, collarType = 'og') {
 }
 
 function renderCharms(charmsArray, collarType = 'og') {
-  let html = ''
-  let phone = false
-  charmsArray.forEach((item, index) =>{
+  let html = '';
+  let phone = false;
+  charmsArray.forEach((item, index) => {
     if (collarType === 'og') {
       if (item[0] !== '#') {
         html += `<span class="color${item[1]}" onclick=deleteCharm(${index})>${item[0]}</span>`;
@@ -1273,7 +1224,7 @@ function renderCharms(charmsArray, collarType = 'og') {
       }
     } else if (collarType === 'gummy') {
       const gummyCharmValue = document.querySelector(`#gummyKey-${item[0]}`).innerHTML;
-      html += `<div id="gummy-${item[0]}" class="gummy gummy-color-${item[1]}" onclick=deleteCharm(${index})>${gummyCharmValue}</div>`;
+      html += `<div id="gummy-${item[0]}" class="gummy gummy-color-${item[1]}" onclick="deleteCharm(${index}, 'gummy')">${gummyCharmValue}</div>`;
       document.querySelector('#charm-container').innerHTML = html;
     } else {
       console.error('Type of keyboard not known');
@@ -1307,20 +1258,28 @@ function changeKeysColor(color) {
     }
   }
   currentColor = parseInt(color.slice(5))
-  myLog('Color actual: ' + currentColor)
+  debug.logItems('changeKeysColor', 'Color:', currentColor)
 
 }
 
-function deleteCharm(charm, collarType = 'og') {
+function deleteCharm(charmIndex, collarType = 'og') {
   if (firstClick) {
     firstClick = false
     emptyCharms(collarType)
   } else {
-    $charmsArray.splice(charm, 1)
-    document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-    myLog(charm + ' eliminado')
-    updateCharmsQty('deleteCharm')
+    $charmsArray.splice(charmIndex, 1)
+    document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray, collarType)
+    updateCharmsQty('deleteCharm', collarType)
   }
+}
+
+function updatePhone() {
+  const phoneDigits = document.querySelector('#phone').value.length;
+  debug.logItems('updatePhone', 'Phone digits', phoneDigits);
+  document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%';
+  document.querySelector('#phone-level').style.background = phoneDigits === 10 ? 'green' : 'red';
+  debug.logItems('updatePhone', 'Digitos teléfono:', phoneDigits);
+
 }
 
 function deletePhone() {
@@ -1342,11 +1301,10 @@ function deletePhone() {
 }
 
 function changeCollarSize(size, sizeIdTag, collarType = 'og', update = true) {
-  document.querySelector(`#${sizeIdTag}`).value = size;
-  removeActiveClass();
-  document.querySelector('.size-' + size).classList.add('active');
   try {
     document.querySelector(`#${sizeIdTag}`).value = size;
+    removeActiveClass();
+    document.querySelector('.size-' + size).classList.add('active');
   } catch (error) {
     console.error(`querySelector did not find #${sizeIdTag}`);
     // console.warn('No existe el collar xs por el limite de variaciones o son charms sueltos');
@@ -1359,8 +1317,9 @@ function changeCollarSize(size, sizeIdTag, collarType = 'og', update = true) {
     console.error(`querySelector did not find input[value='${size.toUpperCase()}']+label`);
     console.error(`FALTA IMPLEMENTAR TAMAÑOS A COLLAR GUMMIES`);
   }
-  if (collarType !== 'gummy' && update) updateCharmsQty('changeCollarSize')
-  //desaparecer color dorado en charms xs
+  if (collarType === 'og' && update) updateCharmsQty('changeCollarSize')
+
+  // Desaparecer color dorado en charms xs
   if ((currentSlug == "charms-extra" && size == 'xs') || (currentSlug == "collar-para-charms" && size == 'xs')) {
     document.querySelector('#color21').style.display = "none"
   } else if ((currentSlug == "charms-extra" && size == 'sml') || (currentSlug == "collar-para-charms" && size !== 'xs')) {
@@ -1371,11 +1330,18 @@ function changeCollarSize(size, sizeIdTag, collarType = 'og', update = true) {
   }
 }
 
-function passProductProperties(productId, collarSize = 'N/A', collarColor = 'N/A', charmsArray, phoneCharm = 'N/A', collarType = 'og') {
-  debug.logPassedItems(productId, collarSize, collarColor, charmsArray, phoneCharm, collarType);
+function passProductProperties(productId, collarSize = 'N/A', collarColor = 'N/A', charmsArray, phoneCharm = null, collarType = 'og') {
+  debug.logItems('passProductProperties', 'Input arguments:', {
+    'productId': productId,
+    'collarsize': collarSize,
+    'collarCollor': collarColor,
+    'charmsArray': charmsArray,
+    'phoneCharm': phoneCharm,
+    'collarType': collarType
+  });
 
   document.querySelector('#collarColor').value = collarColor;
-  
+
   let savePhoneCharm;
   charmsArray.forEach((item, index) => {
     if (item[0] === '#' && !(index === charmsArray - 1)) {
@@ -1386,7 +1352,7 @@ function passProductProperties(productId, collarSize = 'N/A', collarColor = 'N/A
       charmsArray.push(savePhoneCharm);
     }
   });
-  console.log(JSON.stringify(charmsArray));
+  debug.logItems('passProductProperties', 'charmsArray:', JSON.stringify(charmsArray));
 
   let charmsSimplified = [];
   const abc = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
@@ -1397,12 +1363,12 @@ function passProductProperties(productId, collarSize = 'N/A', collarColor = 'N/A
       } else {
         charmsSimplified += '[ Figura ]';
       }
-    } else if (phoneCharm !== 'N/A') {
+    } else if (phoneCharm) {
       charmsSimplified += ('[Charm teléfono]');
     }
   });
   document.querySelector('#charmsSimplified').value = charmsSimplified;
-  
+
   document.querySelector('#phoneCharm').value = phoneCharm;
 
   let charmsCode = {
@@ -1460,8 +1426,11 @@ function numberToHex(num) {
 }
 
 
+/*
 
-//Gummys functions
+--- GUMMIES FUNCTIONS ---
+
+*/
 
 function deleteGummy(index) {
   $gummiesArray.splice(index, 1)
