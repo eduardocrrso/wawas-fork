@@ -3848,7 +3848,7 @@ details-disclosure > details {
 }
 
 
-.keyboard-key {
+.keyboard_key_lastrow {
     font-size: 1.4em;
     border: solid 1px #ccc;
     border-radius: 8px;
@@ -3917,9 +3917,4 @@ div[id^=collar] {
 
 .corazon-4 {
     fill: #fc0f7d;
-}
-
-.gummy > img {
-  height: 36px;
-  max-width: 90%;
 }
