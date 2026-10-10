@@ -647,8 +647,8 @@ function customizer(id) {
   enableBuyButton(false);
 
   //agregar campos para enviar personalizador
-  addCartPropertiesField()
-  document.querySelector('#charmsCode').value = ""
+  addCartPropertiesField();
+  document.querySelector('#charmsCode').value = "";
 
   //cargar teclado personalizado segun id
   switchCustomizer(id)
@@ -897,7 +897,7 @@ function switchCustomizer(id, isFirst = true) {
       break;
     case 7634477645974: //collar-de-gummies
       myLog('Inicializando collar de gummys')
-      minCharms = 7;
+      minCharms = 1;
       maxCharms = 7;
       $charmsArray = [[9, 'rojo'], ['G', 'rojo'], ['U', 'rojo'], ['M', 'rojo'], ['M', 'rojo'], [8, 'rojo'], [8, 'rojo']];
       wawasContainer.innerHTML = gummysKeyboardHTML;
@@ -1126,8 +1126,8 @@ function updateCharmsQty(caller = null, collarType = 'og') {
       enableBuyButton(false);
     }
 
-    // En cambio si el collar es gummy solamente hay que revisar que sean 7 charms
-  } else if (collarType === 'gummy' && !firstClick && charmsQty === minCharms && charmsQty === maxCharms) {
+  // Revisar que el collar gummy tenga 1 a 7 charms
+  } else if (collarType === 'gummy' && !firstClick && charmsQty > 0) {
     enableBuyButton(true);
   } else {
     enableBuyButton(false);
@@ -1334,7 +1334,7 @@ function passProductProperties(productId, collarSize = 'N/A', collarColor = 'N/A
   debug.logItems('passProductProperties', 'Input arguments:', {
     'productId': productId,
     'collarsize': collarSize,
-    'collarCollor': collarColor,
+    'collarColor': collarColor,
     'charmsArray': charmsArray,
     'phoneCharm': phoneCharm,
     'collarType': collarType

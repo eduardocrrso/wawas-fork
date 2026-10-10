@@ -125,10 +125,10 @@ let wawasContainer
 let currentColor = 4
 let phoneNumber = ""
 let phonecharm = false
-let maxCharms = 9
-let minCharms = 5
-let maxGummys = 7
-let minGummys = 7
+let maxCharms = 9;
+let minCharms = 1;
+let maxGummys = 7;
+let minGummys = 7;
 let collarSize = 'XS'
 let enabledKeyboard = false
 let $gummiesArray = []
@@ -147,10 +147,10 @@ function pointZero() {
   currentColor = 4
   phoneNumber = ""
   phonecharm = false
-  maxCharms = 9
-  minCharms = 5
-  maxGummys = 7
-  minGummys = 7
+  maxCharms = 9;
+  minCharms = 1;
+  maxGummys = 7;
+  minGummys = 7;
   collarSize = 'XS'
   enabledKeyboard = false
   $gummiesArray = []
@@ -246,8 +246,8 @@ const charmsKeyboardHTML = `
 
       <!-- INSTRUCCIÓN -->
       <div class="instruction-content">
-        <span class="instruction-icon">👉🏻</span>
-          <span id="instruction-charms" class="instruction-text"> Elige de 5 a 9 charms únicamente</span>
+          <span id="instruction-charms" class="instruction-text">Incluye 5 charms</span>
+          <span id="instruction-subtext" class="instruction-text instruction-subtext">Charm extra $20 c/u</span>
       </div>
 
       <!-- COLORES -->
@@ -1002,8 +1002,8 @@ function customizer(id) {
   enableBuyButton(false);
 
   //agregar campos para enviar personalizador
-  addCartPropertiesField()
-  document.querySelector('#charmsForm').value = ""
+  addCartPropertiesField();
+  document.querySelector('#charmsCode').value = "";
 
   //cargar teclado personalizado segun id
   switchCustomizer(id)
@@ -1033,7 +1033,7 @@ function switchCustomizer(id, isFirst = true) {
       //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
       if (isFirst) enableBuyButton(false)
-      document.querySelector('#charmsForm').value = ""
+      document.querySelector('#charmsCode').value = ""
       break;
     case 9117785129193: //collar-de-charms
       myLog(currentSlug)
@@ -1052,7 +1052,7 @@ function switchCustomizer(id, isFirst = true) {
       //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
       if (isFirst) enableBuyButton(false)
-      document.querySelector('#charmsForm').value = ""
+      document.querySelector('#charmsCode').value = ""
       break;
     case 7412912783510: //collar-de-charms-mini
       myLog(currentSlug)
@@ -1068,11 +1068,9 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('.size-l').style.display = "none"
       document.querySelector('.size-xl').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
-      displayCharms($charmsArray)
+      // passProductProperties(idProduct, $charmsArray)
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
-      // document.querySelector(`input[value='5']+label`).click()
-      //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
       changeKeysColor('color11')
       if (isFirst) enableBuyButton(false)
@@ -1129,8 +1127,8 @@ function switchCustomizer(id, isFirst = true) {
       changeCollarSize('sml', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
-      minCharms = 1
-      maxCharms = 19
+      minCharms = 1;
+      maxCharms = 19;
       // document.getElementById('min-charms').style.display = "none"
       break;
     case 7319719280790: //charms-extra
@@ -1153,14 +1151,15 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('#color-title').style.display = "none"
       document.querySelector('#color-step').style.display = "none"
       document.querySelector('#keyboard-title').innerHTML = "02: Personaliza tus charms (hasta 19 pz)"
-      document.querySelector('#instruction-charms').innerHTML = "¿Quieres más de 19 pz? Solo crea otro carrito 🛒"
+      document.querySelector('#instruction-charms').innerHTML = "Elige de 1 a 19 charms";
+      document.querySelector('#instruction-subtext').innerHTML = "";
       document.querySelector('#instruction-charms').style.fontSize = "1.1rem"
       document.querySelector('#phone').addEventListener('input', updateCharms)
       changeCollarSize('sml', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
-      minCharms = 1
-      maxCharms = 19
+      minCharms = 1;
+      maxCharms = 19;
       break;
     case 7804532261014: //pechera-y-correa-para-mascota-de-charms
       myLog(currentSlug)
@@ -1171,7 +1170,8 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#size-title').innerHTML = "01: Elige el tamaño de tu pechera"
       document.querySelector('#keyboard-title').innerHTML = "02: Personaliza tus 15 charms"
-      document.querySelector('#instruction-charms').innerHTML = "Elige unicamente 15 charms"
+      document.querySelector('#instruction-charms').innerHTML = "Elige de 1 a 15 charms";
+      document.querySelector('#instruction-subtext').innerHTML = '';
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
       document.querySelector('.size-sml').style.display = "none"
@@ -1189,8 +1189,8 @@ function switchCustomizer(id, isFirst = true) {
       changeCollarSize('xs', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
-      minCharms = 15
-      maxCharms = 15
+      minCharms = 1;
+      maxCharms = 15;
       break;
     case 7923429998742: //correa-de-charms
       myLog(currentSlug)
@@ -1214,13 +1214,14 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector("#color-step").style.display = "none"
       document.querySelector("#color-title").style.display = "none"
       document.querySelector('#keyboard-title').innerHTML = "01: Comienza a personalizar <br> tu correa (15 charms)"
-      document.querySelector('#instruction-charms').innerHTML = "Elige unicamente 15 charms"
+      document.querySelector('#instruction-charms').innerHTML = "Elige de 1 a 15 charms"
+      document.querySelector('#instruction-subtext').innerHTML = '';
       //
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
-      minCharms = 15
-      maxCharms = 15
+      minCharms = 1;
+      maxCharms = 15;
       break;
     case 8247523573910: //correa-para-gato-y-razas-chicas ///
       myLog(currentSlug)
@@ -1244,12 +1245,13 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector("#color-step").style.display = "none"
       document.querySelector("#color-title").style.display = "none"
       document.querySelector('#keyboard-title').innerHTML = "01: Comienza a personalizar <br> tu correa (15 charms)"
-      document.querySelector('#instruction-charms').innerHTML = "Elige unicamente 15 charms"
+      document.querySelector('#instruction-charms').innerHTML = "Elige de 1 a 15 charms";
+      document.querySelector('#instruction-subtext').innerHTML = "";
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
-      minCharms = 15
-      maxCharms = 15
+      minCharms = 1;
+      maxCharms = 15;
       break;
     case 8289135952022: //llavero-de-charms
       myLog(currentSlug)
@@ -1270,12 +1272,13 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector("#color-step").style.display = "none"
       document.querySelector("#color-title").style.display = "none"
       document.querySelector('#keyboard-title').innerHTML = "01: Comienza a personalizar  <br> tu llavero (6 charms)"
-      document.querySelector('#instruction-charms').innerHTML = " Agrega unicamente 6 charms"
+      document.querySelector('#instruction-charms').innerHTML = " Agrega de 1 a 6 charms";
+      document.querySelector('#instruction-subtext').innerHTML = '';
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
-      minCharms = 6
-      maxCharms = 6
+      minCharms = 1;
+      maxCharms = 6;
       break;
     case 9120268222697: //llavero-de- testttttttt
       myLog(currentSlug)
@@ -1462,31 +1465,28 @@ function activateAccordionByHeaderId(headerId) {
 
 
 function addCartPropertiesField() {
-  let idfieldImg = document.createElement('input')
-  idfieldImg.setAttribute('type', 'hidden')
-  idfieldImg.setAttribute('name', 'properties[(Ingresa el siguiente link en tu navegador para ver tu diseño)]')
-  idfieldImg.setAttribute('id', 'imageProduct')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldImg, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let idfielPhone = document.createElement('input')
-  idfielPhone.setAttribute('type', 'hidden')
-  idfielPhone.setAttribute('name', 'properties[Telefono]')
-  idfielPhone.setAttribute('id', 'telefono')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfielPhone, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let idfieldSize = document.createElement('input')
-  idfieldSize.setAttribute('type', 'hidden')
-  idfieldSize.setAttribute('name', 'properties[Tamaño]')
-  idfieldSize.setAttribute('id', 'size')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldSize, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let field = document.createElement('input')
-  field.setAttribute('type', 'hidden')
-  field.setAttribute('name', 'properties[_charms]')
-  field.setAttribute('id', 'charmsForm')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(field, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let idfield = document.createElement('input')
-  idfield.setAttribute('type', 'hidden')
-  idfield.setAttribute('name', 'properties[_id_pixelemos]')
-  idfield.setAttribute('id', 'idPixelemos')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfield, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
+  const buttons = (
+    "form[id^='product-form-template-'] .product-form__buttons"
+  );
+  // Si no se encuentra "form" no se hace nada, evita crasheos.
+  if (!buttons) return;
+
+  const fields = [
+    { name: 'Color de collar', id: 'collarColor' },
+    { name: 'Charms', id: 'charmsSimplified' },
+    { name: 'Telefono', id: 'phoneCharm' },
+    { name: '_(Ingresa el siguiente link en tu navegador para ver tu diseño)', id: 'imageProduct' },
+    { name: '_Codigo para revelador', id: 'charmsCode' },
+  ];
+
+  fields.forEach(({ name, id }) => {
+    if (document.getElementById(id)) return; // Evitar duplicados
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = `properties[${name}]`;
+    input.id = id;
+    document.querySelector(buttons).parentElement.insertBefore(input, document.querySelector(buttons));
+  });
 }
 
 
@@ -1504,15 +1504,19 @@ async function getCart() {
 
 //Charms functions
 function updateCharms(caller) {
-  myLog('Updated by: ' + caller)
-  document.querySelector('#values-charms-number').value = $charmsArray.length
-  // if (currentSlug == 'charms-extra' || currentSlug == 'charms-extra-xs') {
-  //   document.querySelector('.quantity__input').value = $charmsArray.length
-  // } else {
-  if ($charmsArray.length < minCharms) {
+  myLog('Updated by: ' + caller);
+
+  const charmsQty = $charmsArray.length;
+  let collarSize;
+  let collarPhone;
+  let phoneDigits;
+
+  document.querySelector('#values-charms-number').value = charmsQty;
+
+  if (charmsQty < minCharms) {
     document.querySelector(`input[value='${minCharms}']+label`).click();
   }
-  if ($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms && document.querySelector(`input[value='${$charmsArray.length}']+label`)) {
+  if (charmsQty >= minCharms && $charmsArray.length <= maxCharms && document.querySelector(`input[value='${$charmsArray.length}']+label`)) {
     document.querySelector(`input[value='${$charmsArray.length}']+label`).click()
   }
   // }
@@ -1523,28 +1527,25 @@ function updateCharms(caller) {
     const variantSelects = document.querySelector('variant-selects');
 
     // Buscar el radio marcado del grupo "Tamaño"
-    const tamañoChecked = variantSelects.querySelector('input[name^="Tamaño"]:checked');
-    const size = document.querySelector('#size').value
-    if (tamañoChecked?.value && (tamañoChecked?.value != size)) {
-      document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
+    const tamañoChecked = document.querySelector('input[name^="Tamaño"]:checked');
+    const collarSize = document.querySelector('#values-collar-size').value
+    if (tamañoChecked?.value && (tamañoChecked?.value != collarSize)) {
+      document.querySelector(`input[value='${collarSize.toUpperCase()}']+label`).click()
     }
   } catch (err) {
     console.log(err)
   }
 
   //avanzar el termometro del telefono
-  let phoneDigits = document.querySelector('#phone').value.length
-  document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%'
-  document.querySelector('#phone-level').style.background = phoneDigits == 10 ? 'green' : 'red'
-  myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits)
-  document.querySelector('#charmsForm').value = displayCharms($charmsArray)
-  let telefono = (document.querySelector('#phone')) ? document.querySelector('#phone').value : ' No aplica'
-  let general = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value}<br>Color del collar: ${document.querySelector('#values-collar-color').value}<br>Teléfono: ${telefono}</div>`
-  if ($gummiesArray.length !== 0) {
-    document.querySelector('#charmsForm').value = general + displayCharms($charmsArray) + displayGummies($gummiesArray)
-  } else {
-    document.querySelector('#charmsForm').value = general + displayCharms($charmsArray)
-  }
+  collarSize = document.querySelector('#values-collar-size').value;
+  let collarColor = document.querySelector('#values-collar-color').value;
+  collarPhone = (document.querySelector('#phone').value) ? document.querySelector('#phone').value : 'N/A';
+  phoneDigits = document.querySelector('#phone').value.length;
+  document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%';
+  document.querySelector('#phone-level').style.background = phoneDigits == 10 ? 'green' : 'red';
+  myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits);
+  let telefono = (document.querySelector('#phone')) ? document.querySelector('#phone').value : 'N/A';
+  passProductProperties(idProduct, collarSize, collarColor, $charmsArray, collarPhone);
   //desbloquear compras si los charms son >= que el minimo, <= maximo, si los digitos del telefono son 10 
   console.log("Array length = ", $charmsArray.length)
   if (($charmsArray.length >= 1 && $charmsArray.length <= maxCharms) && ((phoneDigits == 10) || !phonecharm) && (!firstClick)) {
@@ -1694,7 +1695,7 @@ function changeCollarSize(size, update = true) {
   console.log("size = " + size)
   document.querySelector('#values-collar-size').value = size;
   removeActive();
-  document.querySelector('.size-' + size).classList.add('active')
+  document.querySelector('.size-' + size).classList.add('active');
   try {
     document.querySelector('#size').value = size
     document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
@@ -1830,7 +1831,7 @@ function deleteGummy(index) {
 
 function updateGummys(caller) {
   myLog(caller)
-  document.querySelector('#charmsForm').value = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
+  document.querySelector('#charmsCode').value = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
 }
 
 function changeGummiesColor(color) {
@@ -1862,10 +1863,6 @@ function displayGummies(array) {
 
 }
 
-function getIdPixelemos() {
-  document.querySelector('#idPixelemos').value = currentSlug + '-' + Date.now();
-  return document.querySelector('#idPixelemos').value;
-}
 
 /*Capturar pantalla y enviarla */
 // async function capture(event) {
@@ -1973,7 +1970,7 @@ async function getFinalCaptureImage() {
       const h3Tamaño = document.createElement('h3');
       h3Tamaño.textContent = textoTamanio
       h3Tamaño.className = 'info-item';
-      // document.querySelector('#charmsForm')
+      // document.querySelector('#charmsCode')
       document.querySelector('#size').value = document.querySelector('#values-collar-size').value
       const phoneInput = document.querySelector('#phone');
       if (phoneInput?.value) {
@@ -2197,4 +2194,55 @@ function renderStep() {
     const title = document.getElementById("tittleCustomizer")
     title.innerText = "Finaliza tu compra!"
   }
+}
+
+function passProductProperties(productId, collarSize = 'N/A', collarColor = 'N/A', charmsArray, phoneCharm = null, collarType = 'og') {
+  console.log('passProductProperties', 'Input arguments:', {
+    'productId': productId,
+    'collarsize': collarSize,
+    'collarColor': collarColor,
+    'charmsArray': charmsArray,
+    'phoneCharm': phoneCharm,
+    'collarType': collarType
+  });
+
+  document.querySelector('#collarColor').value = collarColor;
+
+  let savePhoneCharm;
+  charmsArray.forEach((item, index) => {
+    if (item[0] === '#' && !(index === charmsArray - 1)) {
+      savePhoneCharm = item;
+      charmsArray.splice(index, 1);
+    }
+    if (savePhoneCharm) {
+      charmsArray.push(savePhoneCharm);
+    }
+  });
+  console.log('passProductProperties', 'charmsArray:', JSON.stringify(charmsArray));
+
+  let charmsSimplified = [];
+  const abc = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
+  charmsArray.forEach((item) => {
+    if (item[0] !== '#') {
+      if (abc.includes(item[0])) {
+        charmsSimplified += `[ ${item[0]} ]`;
+      } else {
+        charmsSimplified += '[ Figura ]';
+      }
+    } else if (phoneCharm) {
+      charmsSimplified += ('[Charm teléfono]');
+    }
+  });
+  document.querySelector('#charmsSimplified').value = charmsSimplified;
+
+  document.querySelector('#phoneCharm').value = phoneCharm;
+
+  let charmsCode = {
+    productId: productId,
+    collarSize: collarSize,
+    collarColor: collarColor,
+    charmsArray: charmsArray,
+    phoneCharm: phoneCharm,
+  };
+  document.querySelector('#charmsCode').value = JSON.stringify(charmsCode);
 }
