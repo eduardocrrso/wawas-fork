@@ -1510,7 +1510,7 @@ function updateCharms(caller) {
   //   document.querySelector('.quantity__input').value = $charmsArray.length
   // } else {
   if ($charmsArray.length < minCharms) {
-    document.querySelector(`input[value='${5}']+label`).click();
+    document.querySelector(`input[value='${minCharms}']+label`).click();
   }
   if ($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms && document.querySelector(`input[value='${$charmsArray.length}']+label`)) {
     document.querySelector(`input[value='${$charmsArray.length}']+label`).click()
@@ -1547,7 +1547,7 @@ function updateCharms(caller) {
   }
   //desbloquear compras si los charms son >= que el minimo, <= maximo, si los digitos del telefono son 10 
   console.log("Array length = ", $charmsArray.length)
-  if (($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms) && ((phoneDigits == 10 && phonecharm) || !phonecharm) && (!firstClick)) {
+  if (($charmsArray.length >= 1 && $charmsArray.length <= maxCharms) && ((phoneDigits == 10) || !phonecharm) && (!firstClick)) {
     myLog('Compras desbloqueadas')
     enableBuyButton(true)
   } else {
@@ -1685,7 +1685,8 @@ function deletePhone() {
   document.querySelector('#phone-title').style.display = 'none'
   //document.querySelector(`input[value='Sin']+label`).click()
   console.log('telefono eliminado')
-  phonecharm = false
+  phonecharm = false;
+  phoneNumber = '';
   updateCharms('deletePhone')
 }
 
