@@ -899,7 +899,7 @@ function switchCustomizer(id, isFirst = true) {
       myLog('Inicializando collar de gummys')
       minCharms = 1;
       maxCharms = 7;
-      $charmsArray = [[9, 'rojo'], ['G', 'rojo'], ['U', 'rojo'], ['M', 'rojo'], ['M', 'rojo'], [8, 'rojo'], [8, 'rojo']];
+      $charmsArray = [[9, 'rojo'], ['G', 'rojo'], ['U', 'rojo'], ['M', 'rojo'], ['M', 'rojo'], ['Y', 'rojo'], [8, 'rojo']];
       wawasContainer.innerHTML = gummysKeyboardHTML;
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray, 'gummy');
       window.$gummyColor = document.querySelector('#values-gummys-color');
