@@ -2,7 +2,7 @@
 
 ## Notas
 
-Este proyecto se encuentra en desarrollo. Aún no se lanza a producción.
+Este proyecto se encuentra en desarrollo. El branch main se encuentra en producción. Aún faltan cambios en desarrollo.
 
 ## Detalles del proyecto
 
@@ -13,16 +13,19 @@ El propósito de este repositorio es de brindar soporte a la aplicación ya exis
 
 ### Descripción del proyecto
 
-El proyecto es principalmente un script para agregar un personalizador de charms para ciertos productos en [Tienda Shopify Wawas](https://wawas.shop).
-La tienda vende collares personalizador para mascotas. El personalizador permite a los usuarios escoger talla, color de correa, y charms de colores.
+Este proyecto es un script que se utiliza en la [Tienda Shopify Wawas](https://wawas.shop) para inyectar un teclado personalizador de productos. Los productos son collares y correas con charms personalizables. La personalización de producto se incluye en las propiedades de los productos para que los clientes puedan revisar su pedido antes de realizar su compra en este repositorio, así como para que los empleados revelen los pedidos de los clientes en un revelador espeical alojado también en este repositorio.
 
-Este repositorio incluye una página para revisar los pedidos de los clientes. A cada pedido se le incluye una nota de compra, esta nota de compra es un link para visualizar los pedidos de los clientes. Ese link lleva en el header un código que muestra el collar armado en esta página directamente.
+## Funciones del proyecto
 
 ### Script
 
 El script utiliza los IDs de producto para dar un teclado personalizador específico según el collar seleccionado por el cliente.
 Una vez identificado el producto, el script inyecta HTML a la página para mostrar el personalizador adecuado.
 
-### Página de visualización
+### Visualizador
 
-Se está investigando cómo funciona la página para visualizar los pedidos.
+La página de visualización está orientada al cliente final para revisar su producto. El script agrega un link al visualizador con los datos codificados en el link para que al abrirse se decodifique y muestre el producto personalizado.
+
+### Revelador
+
+El revelador está orientado a los empleados de la tienda para copiar el código agregado por el script y revelar varios pedidos en una sola imagen.
