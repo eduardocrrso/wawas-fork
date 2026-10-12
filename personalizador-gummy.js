@@ -62,7 +62,7 @@ Instrucciones para agregar nuevos gummy charms
 */
 // Revisar el URL actual para ver de dónde descargamos assets
 const currentUrl = window.location.href;
-const assetsUrl = currentUrl.includes("github") || currentUrl.includes("127.0") ? "./assets/charms" : "https://cdn.shopify.com/s/files/1/0500/2946/1654/files";
+const assetsUrl = currentUrl.includes("github") || currentUrl.includes("127.0") ? "../assets/charms" : "https://cdn.shopify.com/s/files/1/0500/2946/1654/files";
 
 document.addEventListener('DOMContentLoaded', function () {
   if (instances.some(product => product.id === idProduct)) {
