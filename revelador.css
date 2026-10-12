@@ -339,7 +339,7 @@ div[id^=collar] {
     border-radius: 10px;
 }
 
-#charm-container {
+#charm-container:not(.gummies-container) {
     font-family: charms;
     position: absolute;
     font-size: 38px;
@@ -350,13 +350,13 @@ div[id^=collar] {
     margin-bottom: 12px;
 }
 
-#charm-container.charms-sueltos {
+#charm-container:not(.gummies-container).charms-sueltos {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-#charm-container>span {
+#charm-container:not(.gummies-container)>span {
     cursor: pointer;
 }
 
@@ -716,7 +716,7 @@ input[id^='color'] {
 #phone-level {
     background: red;
     height: 4px;
-    width: 10%;
+    width: 0;
     margin-bottom: 40px;
     transition: all .5s ease-out;
     position: relative;
@@ -743,7 +743,7 @@ input[id^='color'] {
 }
 
 @media (max-width: 768px) {
-    #charm-container {
+    #charm-container:not(.gummies-container) {
         font-size: 4.6rem;
     }
 
@@ -774,7 +774,8 @@ input[id^='color'] {
     content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55.28 59.31"><defs></defs><title>Asset 33</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M41.65,59.19a2.38,2.38,0,0,1-1.35-.43,3,3,0,0,1-1-1l-1.88-4.17a3.42,3.42,0,0,0-1.05-1.13A2.54,2.54,0,0,0,35,52H20.28a2.64,2.64,0,0,0-1.5.47,2.79,2.79,0,0,0-1,1.13l-1.94,4.18a2.51,2.51,0,0,1-.9,1,2.31,2.31,0,0,1-1.29.43h-12A2.2,2.2,0,0,1,1,59.06a1.42,1.42,0,0,1-.58-.39A1.26,1.26,0,0,1,.14,58a1.54,1.54,0,0,1,.19-.9L20.53,10a2.41,2.41,0,0,1,.9-1,2.33,2.33,0,0,1,1.35-.43h9.75A2.24,2.24,0,0,1,33.82,9a2.48,2.48,0,0,1,.9,1L55.05,57.34a1.31,1.31,0,0,1-.1,1.22,1.45,1.45,0,0,1-1.39.63ZM27.59,29.52c-.29,0-.54.24-.74.71l-3.49,8.42a1.27,1.27,0,0,0,0,1.2,1.25,1.25,0,0,0,1.15.51h6.2a1.24,1.24,0,0,0,1.11-.51,1.09,1.09,0,0,0,0-1.21c-.46-1.15-1-2.5-1.67-4.06l-1.81-4.35C28.12,29.75,27.88,29.52,27.59,29.52Z"/><path d="M32.53,8.66a2.18,2.18,0,0,1,1.22.41,2.29,2.29,0,0,1,.85,1L54.93,57.39a1.17,1.17,0,0,1-.09,1.11,1.32,1.32,0,0,1-1.28.56H41.65a2.17,2.17,0,0,1-1.28-.41,3,3,0,0,1-.93-1l-1.88-4.2a3.53,3.53,0,0,0-1.09-1.16,2.64,2.64,0,0,0-1.5-.5H20.28a3,3,0,0,0-2.6,1.68l-1.95,4.18a2.36,2.36,0,0,1-.85,1,2.1,2.1,0,0,1-1.22.41h-12A1.9,1.9,0,0,1,1,58.94a1.23,1.23,0,0,1-.53-.35A1.15,1.15,0,0,1,.26,58a1.47,1.47,0,0,1,.19-.84L20.64,10a2.39,2.39,0,0,1,.86-1,2.24,2.24,0,0,1,1.28-.41h9.75m-8,31.82h6.2a1.37,1.37,0,0,0,1.22-.56,1.17,1.17,0,0,0,0-1.31c-.47-1.16-1-2.52-1.67-4.08s-1.26-3-1.82-4.36c-.23-.51-.51-.77-.85-.77s-.63.26-.86.78L23.25,38.6a1.26,1.26,0,0,0,1.27,1.88m8-32.07H22.78a2.47,2.47,0,0,0-1.42.45,2.58,2.58,0,0,0-.94,1.08L.22,57.08a1.74,1.74,0,0,0-.21,1,1.46,1.46,0,0,0,.32.7,1.5,1.5,0,0,0,.62.41,2,2,0,0,0,.73.14h12A2.38,2.38,0,0,0,15,58.86,2.6,2.6,0,0,0,16,57.78l1.95-4.18a2.65,2.65,0,0,1,.94-1.08,2.5,2.5,0,0,1,1.43-.45H35a2.4,2.4,0,0,1,1.36.45,3.44,3.44,0,0,1,1,1.08l1.88,4.18a3.14,3.14,0,0,0,1,1.08,2.47,2.47,0,0,0,1.42.45H53.56a1.57,1.57,0,0,0,1.5-.69,1.44,1.44,0,0,0,.1-1.33L34.83,9.94a2.73,2.73,0,0,0-.94-1.08,2.38,2.38,0,0,0-1.36-.45Zm-8,31.82a1.13,1.13,0,0,1-1-.45,1.09,1.09,0,0,1,0-1.08L27,30.28q.28-.63.63-.63c.23,0,.44.21.62.63L30,34.63c.64,1.55,1.2,2.91,1.67,4.07a1,1,0,0,1,0,1.08,1.14,1.14,0,0,1-1,.45Z"/><circle class="cls-2" cx="27.64" cy="3.67" r="3.55"/></g></g></svg>')
 }
 
-.gummy svg {
+.gummy svg,
+.gummy img {
     height: 32px;
     width: auto;
     overflow: visible;
@@ -927,11 +928,6 @@ input[id^='color'] {
     color: #FACF00;
 }
 
-#gummy-0 {
-    height: 40px;
-    margin-bottom: -5px;
-}
-
 .boton-glitter {
     background: url('assets/bg-glitter.png');
 }
@@ -1018,7 +1014,7 @@ ul.keyboards-tabs-nav-tabs {
 }
 
 /*Gummies container*/
-#gummies-container {
+#charm-container.gummies-container {
     width: 100%;
     height: var(--gummies-container-height);
     margin-bottom: calc(var(--gummies-container-height) * -1);
@@ -1027,17 +1023,23 @@ ul.keyboards-tabs-nav-tabs {
     padding: 0 14px;
 }
 
-#gummies-container .gummy {
+#charm-container.gummies-container .gummy {
     margin: 8px;
     cursor: pointer;
     font-size: 32px;
     height: fit-content;
 }
 
-#gummies-container #gummy-0 {
-    height: 48px;
+#charm-container.gummies-container #gummy-0 {
+    height: 44px;
+    width: 34px;
     position: relative;
-    bottom: 3px;
+    bottom: 4px;
+}
+
+#gummy-0 img {
+    height: 100%;
+    max-width: 100%;
 }
 
 /*pop up borrar charm*/
@@ -1596,54 +1598,4 @@ dt {
     100% {
         transform: scale(1);
     }
-}
-
-
-/*
- .charms-sml  #charm-key-6.color21{
-  pointer-events: none;
-}
-.charms-sml #charm-key-6.color21:before{
-  content: "AGOTADO";
-  display: block;
-  font-family: sans-serif;
-  color: #000;
-  font-size: 10px;
-  width: 100%;
-  position: absolute;
-  transform: rotate(-63deg);
-}
-
-
-*/
-/*
-input[id^=collar].agotado {
-  pointer-events:none;  
-  font-size: 8px;
-  transform: rotate(-45deg);  
-  color:#fff;
-}*/
-/*
-.charms-sml #charm-key-1.color13,
-
-.keyboard_key.agotado{
-  pointer-events: none;
-}
-/*
-
-.charms-sml #charm-key-1.color13:before,
-
-.keyboard_key.agotado:before{
-    content: "AGOTADO";
-    display: block;
-    font-family: sans-serif;
-    color: #000;
-    font-size: 10px;
-    width: 100%;
-    position: absolute;
-    transform: rotate(-63deg);
-}
-
-.pechera-y-correa-para-mascota-de-charms .medidas{
-  display: none;
 }
