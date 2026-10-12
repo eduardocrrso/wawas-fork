@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <script src="/revelador/revelador.js"></script>
+  <title>Wawas | Revelador</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Noto Sans", sans-serif;
+      font-weight: 600;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .main-container {
+      display: flex;
+      justify-content:space-between;
+      gap: 16px;
+    }
+
+    .column {
+      flex: 1;
+      display: flex;
+      flex-flow: column;
+      padding: 0 16px 16px;
+    }
+
+    .column h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Revelador de Productos</h1>
+  <div class="main-container">
+    <div class="column codigo">
+      <h2>Código de Productos</h2>
+      <textarea type="text" id="item-0"></textarea>
+    </div>
+    <div id="revelador" class="column revelador">
+      <h2>Revelador</h2>
+      <div id="item-revelador-0" class="item"></div>
+      <div id="item-revelador-1" class="item"></div>
+    </div>
+  </div>
+</body>
+
+</html>
