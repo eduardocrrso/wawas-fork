@@ -16,7 +16,7 @@ const productNames = {
   7484253372566: 'Collar Glow in the Dark',
   7804532261014: 'Pechera con Correa',
   7923429998742: 'Correa',
-  8247523573910: 'Collar Raza Chica',
+  8247523573910: 'Correa Raza Chica',
   7319719280790: 'Charms Sueltos',
   8289135952022: 'Llavero Charms',
 };
