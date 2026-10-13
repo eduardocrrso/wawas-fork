@@ -105,6 +105,12 @@ h2 {
   text-align: center;
 }
 
+.item {
+  outline: solid black 1px;
+  padding: 4px;
+  border-radius: 8px;
+}
+
 .error {
   color: red;
 }
