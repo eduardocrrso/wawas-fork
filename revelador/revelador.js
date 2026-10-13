@@ -11,7 +11,15 @@ const productKeys = {
 };
 
 const productNames = {
-  '7340949438614': 'Collar de charms para mascota',
+  7340949438614: 'Collar de charms para mascota',
+  7634477645974: 'Collar Gummy',
+  8582499074198: 'Collar Funfetti',
+  7484253372566: 'Collar Glow in the Dark',
+  7804532261014: 'Pechera con Correa',
+  7923429998742: 'Correa',
+  8247523573910: 'Collar Raza Chica',
+  7319719280790: 'Charms Sueltos',
+  8289135952022: 'Llavero Charms',
 };
 
 // Adds an event listener to the first textarea starting the script
@@ -49,17 +57,36 @@ const reveal = {
     productContainer.id = `item-revelador-${index}`;
 
     console.log(`productObjects[${index}]`, productObjects[index]);
-    
+
     Object.keys(productObjects[index]).forEach((key) => {
+      if (!productObjects[index][key]) return;
+
       const productAttributeDiv = document.createElement('div');
 
-      if (Array.isArray(productObjects[0][key])) {
-        // Charms logic
-        productAttributeDiv.innerHTML = 'charms here';
-
-      } else if (key === 'productId') {
+      if (key === 'productId') {
         const productName = productNames[productObjects[index][key]];
         productAttributeDiv.innerHTML = `${productKeys[key]}: ${productName}`;
+      } else if (Array.isArray(productObjects[index][key])) {
+        const collarContainer = document.createElement('div');
+        collarContainer.classList.add('collar-container');
+
+        const collarDiv = document.createElement('div');
+        collarDiv.classList.add('collar');
+        collarDiv.classList.add(`collar6`); // <<<<<<<<<<<<<<<< color to color-class?
+        const charmContainer = document.createElement('div');
+        charmContainer.classList.add('charm-container');
+
+        collarContainer.appendChild(collarDiv);
+        collarContainer.appendChild(charmContainer);
+
+        productObjects[index][key].forEach((charm) => {
+          const charmSpan = document.createElement('span');
+          charmSpan.classList.add(`color${charm[1]}`);
+          charmSpan.innerHTML = charm[0];
+          charmContainer.appendChild(charmSpan);
+        });
+
+        productAttributeDiv.appendChild(collarContainer);
       } else {
         productAttributeDiv.innerHTML = `${productKeys[key]}: ${productObjects[index][key]}`;
       }
