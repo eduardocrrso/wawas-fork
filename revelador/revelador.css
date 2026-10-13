@@ -3,6 +3,11 @@
   src: url("/assets/fonts/charms.ttf");
 }
 
+@font-face {
+    font-family: 'gummies';
+    src: url('/assets/fonts/gummies.ttf');
+}
+
 :root {
   --textura: url()assets/fonts/;
   /*url("assets/fonts/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAMCAYAAAEomcwLAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAOJJREFUeNpi+P//fwjT+fPnGQACiAHMunDhAgNAADGeOXMmhJmZmQEggBhBQgxAwMQABXAGQAAxXrt2LURTU5Ph+vXrDCCa6du3b2CZnz9/QlT8+/cvhJGREWQuw8WLFxkAAghuGtywr1+/MoAwDLBwc3ODGX///mUAOYCJAQ3ABUCGAi1gYIEJPH/+HEwDBBjj9+/fQ+7fv88Acg8XFxeDoqIiAwcHB8KSq1evMhgbG8MFQJ7X19dnYGJiQrUD7leoJzAcgQswiYmJoQgICwszvHjxguH3798MT58+xQwKdAAA0qtaAxCoGJYAAAAASUVORK5CYII=");*/
@@ -112,12 +117,23 @@ h2 {
   flex-wrap: wrap;
 }
 
-.charm-container:not(.gummies-container) span {
-  font-family: 'charms';
+.charm-container span {
   font-size: 38px;
   letter-spacing: 0;
   text-shadow: rgba(0, 0, 0, .867) 2px 2px 6px;
   text-align: center;
+}
+
+.collar-container span {
+  font-family: 'charms';
+}
+
+.collar-container.gummies-container span {
+  font-family: 'gummies';
+}
+
+img.gummy {
+  height: 32px;
 }
 
 .color1 {

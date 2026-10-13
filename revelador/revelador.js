@@ -33,6 +33,26 @@ const collarColorToClassName = {
   'Cafe': '9'
 };
 
+const gummyCharmToImg = {
+  6: 'pizza',
+  7: 'alien',
+  8: 'corazon',
+  9: 'arcoiris',
+  10: 'alien-glow',
+  11: 'billete',
+  12: 'anillo',
+  13: 'pollo',
+  14: 'cherry',
+  15: 'pepinillo',
+  16: 'hotdog-rojo',
+  17: 'hotdog-amarillo',
+  18: 'galleta',
+  19: 'llave-amarilla',
+  20: 'candado-amarillo',
+  21: 'llave-dorada',
+  22: 'candado-dorado',
+};
+
 // Adds an event listener to the first textarea starting the script
 // and a listener to the delete button
 document.addEventListener('DOMContentLoaded', () => {
@@ -64,13 +84,10 @@ const parseProduct = (index) => {
 const reveal = {
   product: (index) => {
     const revealerProducts = getProductDivs();
-    console.log(revealerProducts[index]);
 
     revealerProducts[index].innerHTML = '';
     const productContainer = document.createAttribute('div');
     productContainer.id = `item-revelador-${index}`;
-
-    console.log(`productObjects[${index}]`, productObjects[index]);
 
     Object.keys(productObjects[index]).forEach((key) => {
       if (!productObjects[index][key]) return;
@@ -84,6 +101,16 @@ const reveal = {
         const collarContainer = document.createElement('div');
         collarContainer.classList.add('collar-container');
 
+        if (productObjects[index]['productId'] === 7634477645974) {
+          collarContainer.classList.add('gummies-container');
+          
+          const gummyCollarImage = document.createElement('img');
+          gummyCollarImage.src = '/assets/collar/gummy.png';
+          gummyCollarImage.classList.add('gummy-collar-image');
+
+          collarContainer.appendChild(gummyCollarImage);
+        }
+
         const charmContainer = document.createElement('div');
         charmContainer.classList.add('charm-container');
 
@@ -92,15 +119,23 @@ const reveal = {
         collarContainer.appendChild(charmContainer);
 
         productObjects[index][key].forEach((charm) => {
+          // Create charm element and add class color
           const charmSpan = document.createElement('span');
-          if (productObjects[index]['productId'] === 7634477645974) {
-            charmSpan.classList.add(`gummy-color-${charm[1]}`);
-            console.log(1, charm);
-          } else {
+          if (productObjects[index]['productId'] !== 7634477645974) {
             charmSpan.classList.add(`color${charm[1]}`);
-            console.log(2, charm);
+          } else {
+            charmSpan.classList.add(`gummy-color-${charm[1]}`);
           }
-          charmSpan.innerHTML = charm[0];
+
+          // For gummy charm, translate IDs for actual images as needed
+          if (productObjects[index]['productId'] === 7634477645974 && charm[0] > 5) {
+            const gummyImage = document.createElement('img');
+            gummyImage.src = `/assets/charms/gummy-${gummyCharmToImg[charm[0]]}.svg`;
+            gummyImage.classList.add('gummy');
+            charmSpan.appendChild(gummyImage);
+          } else {
+            charmSpan.innerHTML = charm[0];
+          }
           charmContainer.appendChild(charmSpan);
         });
 
