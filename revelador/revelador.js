@@ -133,6 +133,11 @@ const reveal = {
             gummyImage.src = `/assets/charms/gummy-${gummyCharmToImg[charm[0]]}.svg`;
             gummyImage.classList.add('gummy');
             charmSpan.appendChild(gummyImage);
+          } else if (charm[0] === '#') {
+            const phoneCharmImage = document.createElement('img');
+            phoneCharmImage.src = '/assets/charms/phonecharm.png';
+            phoneCharmImage.classList.add('phoneCharm');
+            charmSpan.appendChild(phoneCharmImage);
           } else {
             charmSpan.innerHTML = charm[0];
           }

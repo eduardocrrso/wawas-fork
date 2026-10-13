@@ -132,8 +132,13 @@ h2 {
   font-family: 'gummies';
 }
 
+img.phoneCharm,
 img.gummy {
   height: 32px;
+}
+
+.gummy-collar-image {
+  width: 100%;
 }
 
 .color1 {
