@@ -46,15 +46,16 @@
 
 <body>
   <h1>Revelador de Productos</h1>
+  <div id="deleteButton">Eliminar Todo</div>
   <div class="main-container">
-    <div class="column codigo">
+    <div id="columnCode" class="column codigo">
       <h2>Código de Productos</h2>
       <textarea type="text" id="item-0"></textarea>
+      <div id="add-button" onclick="addProductInputs()">+</div>
     </div>
     <div id="revelador" class="column revelador">
       <h2>Revelador</h2>
       <div id="item-revelador-0" class="item"></div>
-      <div id="item-revelador-1" class="item"></div>
     </div>
   </div>
 </body>

@@ -1,6 +1,5 @@
 console.debug('revelador.js loaded');
 
-let productInputs = [];
 let productObjects = [];
 
 const productKeys = {
@@ -23,16 +22,19 @@ const productNames = {
 };
 
 // Adds an event listener to the first textarea starting the script
+// and a listener to the delete button
 document.addEventListener('DOMContentLoaded', () => {
-  productInputs.push(document.getElementById('item-0'));
-  productInputs[0].addEventListener('input', () => {
-    parseProduct(0);
-  });
+  const input = document.getElementById('item-0');
+  input.addEventListener('input', () => parseProduct(0));
+  
+  const deleteButton = document.getElementById('deleteButton');
+  deleteButton.addEventListener('click', () => deleteEverything())
 });
 
 const parseProduct = (index) => {
+  const input = document.getElementById(`item-${index}`);
   try {
-    const productCode = productInputs[index].value;
+    const productCode = input.value;
     const product = JSON.parse(productCode);
     productObjects[index] = product;
   } catch (e) {
@@ -104,3 +106,31 @@ const reveal = {
 const getProductDivs = () => {
   return document.getElementById('revelador').getElementsByClassName('item');
 }
+
+const addProductInputs = () => {
+  // Add textarea to columnCode
+  const columnCode = document.getElementById('columnCode');
+  const index = columnCode.childElementCount - 2;
+  const input = document.createElement('textarea');
+  input.id = `item-${index}`;
+  input.setAttribute('type', 'text');
+  input.addEventListener('input', () => { parseProduct(index) });
+  columnCode.appendChild(input);
+
+  const addButton = document.getElementById('add-button');
+  columnCode.removeChild(addButton);
+  columnCode.appendChild(addButton);
+
+  // Add revealer div
+  const columnRevealer = document.getElementById('revelador');
+  const revealer = document.createElement('div');
+  revealer.id = `item-revelador-${index}`;
+  revealer.classList.add('item');
+  columnRevealer.appendChild(revealer);
+}
+
+const deleteEverything = () => {
+  const firstTextarea = document.getElementById('item-0');
+  firstTextarea.value = '';
+  location.reload();
+};
