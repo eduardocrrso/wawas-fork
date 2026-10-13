@@ -93,7 +93,13 @@ const reveal = {
 
         productObjects[index][key].forEach((charm) => {
           const charmSpan = document.createElement('span');
-          charmSpan.classList.add(`color${charm[1]}`);
+          if (productObjects[index]['productId'] === 7634477645974) {
+            charmSpan.classList.add(`gummy-color-${charm[1]}`);
+            console.log(1, charm);
+          } else {
+            charmSpan.classList.add(`color${charm[1]}`);
+            console.log(2, charm);
+          }
           charmSpan.innerHTML = charm[0];
           charmContainer.appendChild(charmSpan);
         });

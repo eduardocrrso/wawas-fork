@@ -269,3 +269,59 @@ h2 {
 .collar9 {
   background-color: var(--collar9);
 }
+
+.gummy-color-naranja {
+    color: #FF8201;
+}
+
+.gummy-color-rojo {
+    color: #fc3a30;
+}
+
+.gummy-color-rosa-fuerte {
+    color: #ef3581;
+}
+
+.gummy-color-rosa-pastel {
+    color: #FFA1F1;
+}
+
+.gummy-color-lila {
+    color: #AA81E6;
+}
+
+.gummy-color-morado {
+    color: #4F0571;
+}
+
+.gummy-color-azul-cielo {
+    color: #00BDF8;
+}
+
+.gummy-color-azul-fuerte {
+    color: #3132FF;
+}
+
+.gummy-color-verde {
+    color: #00AC0F;
+}
+
+.gummy-color-verde-limon {
+    color: #94FF2B;
+}
+
+.gummy-color-amarillo {
+    color: #FACF00;
+}
+
+.charm-container span.gummy-color-glitter {
+  text-shadow: none;
+}
+
+.gummy-color-glitter {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: url('../assets/bg-glitter.png');
+    background-size: 32px;
+}
