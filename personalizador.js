@@ -1011,7 +1011,9 @@ function customizer(id) {
 
 const charmsPlaceholdersArray = {
   'large-placeholder': [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]],
-  'small-placeholder': [['C', 11], ['U', 12], ['S', 13], ['T', 14], ['7', 15], ['M', 16]]
+  'funfetti-placeholder': [['A', 22], ['R', 22], ['M', 22], ['A', 22], ['7', 22], ['A', 22], ['Q', 22], ['U', 22], ['I', 22]],
+  'gitd-placeholder': [['A', 10], ['R', 10], ['M', 10], ['A', 10], ['7', 10], ['A', 10], ['Q', 10], ['U', 10], ['I', 10]],
+  'small-placeholder': [['C', 11], ['U', 12], ['S', 13], ['T', 14], ['7', 15], ['M', 16]],
 };
 let charmsPlaceholder = [];
 
@@ -1294,7 +1296,7 @@ function switchCustomizer(id, isFirst = true) {
       break;
     case 7484253372566: //collar-de-charms-glow-in-the-dark
       wawasContainer.innerHTML = charmsKeyboardHTML
-      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      charmsPlaceholder = charmsPlaceholdersArray['gitd-placeholder'];
       document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-sml').style.display = "none"
       //document.querySelector('.size-xl').style.display = "none"
@@ -1310,7 +1312,7 @@ function switchCustomizer(id, isFirst = true) {
       break;
     case 8582499074198: //collar-de-charms-conffeti
       wawasContainer.innerHTML = charmsKeyboardHTML
-      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      charmsPlaceholder = charmsPlaceholdersArray['funfetti-placeholder'];
       document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-sml').style.display = "none"
       //document.querySelector('.size-xl').style.display = "none"
