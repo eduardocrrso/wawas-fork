@@ -1299,7 +1299,6 @@ function switchCustomizer(id, isFirst = true) {
       charmsPlaceholder = charmsPlaceholdersArray['gitd-placeholder'];
       document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-sml').style.display = "none"
-      //document.querySelector('.size-xl').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "none"
       document.querySelector('.new-color-keyboard').style.display = "none"
       document.querySelector('.size-xs .medidas').textContent = '20-33cm';
@@ -1307,7 +1306,7 @@ function switchCustomizer(id, isFirst = true) {
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color10')
-      // document.querySelector(`input[value='5']+label`).click()
+      document.querySelector('#instruction-subtext').innerHTML = 'Charm extra $40 c/u';
       if (isFirst) enableBuyButton(false)
       break;
     case 8582499074198: //collar-de-charms-conffeti
