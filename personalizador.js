@@ -1,3 +1,10 @@
+const debug = {
+  active: true,
+  log: (...items) => {
+    if (debug.active) console.log(...items);
+  },
+};
+
 //ids de producto activas
 const instances = [
   { id: 9117785129193, class: 'collar-para-charms' },// copia dev
@@ -1483,7 +1490,25 @@ async function getCart() {
 }
 
 //Charms functions
+
+function syncPhoneState() {
+  const phone = document.getElementById('phone');
+  const display = hasPhoneCharm() ? '' : 'none';
+  phone.style.display = display;
+  document.getElementById('phone-title').style.display = display;
+  document.getElementById('phone-level').style.display = display;
+
+  if (!hasPhoneCharm) {
+    phone.value = '';
+    phoneNumber = '';
+  }
+}
+
 function updateCharms(caller) {
+  debug.log('called updateCharms.', '$charmsArray:', JSON.stringify($charmsArray));
+  
+  syncPhoneState();
+
   const charmsQty = $charmsArray.length;
   let collarSize;
   let collarPhone;
@@ -1517,11 +1542,12 @@ function updateCharms(caller) {
   //avanzar el termometro del telefono
   collarSize = document.querySelector('#values-collar-size').value;
   let collarColor = document.querySelector('#values-collar-color').value;
-  collarPhone = (document.querySelector('#phone').value) ? document.querySelector('#phone').value : 'N/A';
-  phoneDigits = document.querySelector('#phone').value.length;
+  const phoneValue = hasPhoneCharm() ? document.getElementById('phone').value : '';
+  collarPhone = phoneValue || 'N/A';
+  phoneDigits = phoneValue.length;
+  const telefono = phoneValue || 'N/A';
   document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%';
   document.querySelector('#phone-level').style.background = phoneDigits == 10 ? 'green' : 'red';
-  let telefono = (document.querySelector('#phone')) ? document.querySelector('#phone').value : 'N/A';
   passProductProperties(idProduct, collarSize, collarColor, $charmsArray, collarPhone);
   //desbloquear compras si los charms son >= que el minimo, <= maximo, si los digitos del telefono son 10 
   if (($charmsArray.length >= 1 && $charmsArray.length <= maxCharms) && ((phoneDigits == 10) || !phonecharm) && (!firstClick)) {
@@ -1572,23 +1598,30 @@ function emptyCharms() {
   updateCharms('emptyCharms')
 }
 
+function hasPhoneCharm() {
+  return $charmsArray.some(c => c[0] === '#');
+}
+
 function addCharm(charm) {
   if (firstClick) {
     firstClick = false
     emptyCharms()
   }
-  if ($charmsArray.length < maxCharms) {
-    $charmsArray.push([charm, currentColor])
-    document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-    if (charm == '#') {
-      phonecharm = true
-      phoneNumber = document.querySelector('#phone').value
-      document.querySelector('#phone').style.display = ''
-      document.querySelector('#phone-title').style.display = ''
-      document.querySelector('#phone-level').style.display = ''
-      //document.querySelector(`input[value='Con']+label`).click()
 
+  if ($charmsArray.length < maxCharms) {
+    const item = [charm, currentColor];
+    if (charm == '#') {
+      if (hasPhoneCharm()) return;
+      $charmsArray.push(item);
+    } else {
+      const i = $charmsArray.findIndex(c => c[0] === '#');
+      if (i === -1) {
+        $charmsArray.push(item);
+      } else {
+        $charmsArray.splice(i, 0, item);
+      }
     }
+    document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
   }
   updateCharms('addCharm')
 }
@@ -1644,18 +1677,13 @@ function deleteCharm(charm) {
 }
 
 function deletePhone() {
-  for (let x = 0; x < $charmsArray.length; x++) {
-    if ($charmsArray[x].includes('#')) {
-      charm = x
-      break
-    }
-  }
-  $charmsArray.splice(charm, 1)
+  const idx = $charmsArray.findIndex(c => c[0] === '#');
+  if (idx !== -1) $charmsArray.splice(idx, 1);
+
   document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
   document.querySelector('#phone').value = ''
   document.querySelector('#phone').style.display = 'none'
   document.querySelector('#phone-title').style.display = 'none'
-  //document.querySelector(`input[value='Sin']+label`).click()
   phonecharm = false;
   phoneNumber = '';
   updateCharms('deletePhone')
