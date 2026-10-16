@@ -1,3 +1,10 @@
+const debug = {
+  active: true,
+  log: (...items) => {
+    if (debug.active) console.log(...items);
+  },
+};
+
 //ids de producto activas
 const instances = [
   { id: 9117785129193, class: 'collar-para-charms' },// copia dev
@@ -20,8 +27,6 @@ const instances = [
 //obtener el id del producto
 const idProduct = __st.rid;
 
-console.log(idProduct, "idProduct")
-
 /*  --- GUMMY CHARMS ---
 
 Instrucciones para agregar nuevos gummy charms
@@ -43,7 +48,6 @@ const assetsUrl = currentUrl.includes("github") || currentUrl.includes("127.0") 
 
 document.addEventListener('DOMContentLoaded', function () {
   if (instances.some(product => product.id === idProduct)) {
-    console.log('Powered by Pixelemos ðŸ’œ')
     customizer(idProduct)
 
     const steps = document.querySelectorAll(".step");
@@ -105,8 +109,6 @@ document.addEventListener('DOMContentLoaded', function () {
     openStep(1)
 
 
-  } else {
-    console.log('Powered by Pixelemos ðŸ¤')
   }
 }, false);
 
@@ -118,7 +120,7 @@ const currentSlug = instances.find(instance => instance.id === idProduct).class;
 const buyButton = document.querySelector('[id^="ProductSubmitButton"]')
 const quantityInput = document.querySelector('[id^="Quantity-Form-template"]')
 const $sizeform = document.querySelector('#values-collar-size')
-var $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15]]
+var $charmsArray = [];
 var isPack = false
 let verbose = false
 let wawasContainer
@@ -1014,14 +1016,21 @@ function customizer(id) {
   // nextBtn()
 }
 
+const charmsPlaceholdersArray = {
+  'large-placeholder': [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]],
+  'funfetti-placeholder': [['A', 22], ['R', 22], ['M', 22], ['A', 22], ['7', 22], ['A', 22], ['Q', 22], ['U', 22], ['I', 22]],
+  'gitd-placeholder': [['A', 10], ['R', 10], ['M', 10], ['A', 10], ['7', 10], ['A', 10], ['Q', 10], ['U', 10], ['I', 10]],
+  'small-placeholder': [['C', 11], ['U', 12], ['S', 13], ['T', 14], ['7', 15], ['M', 16]],
+};
+let charmsPlaceholder = [];
+
 function switchCustomizer(id, isFirst = true) {
 
   switch (id) {
     case 7340949438614: //collar-de-charms
-      myLog(currentSlug)
-      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['7', 15]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
@@ -1029,17 +1038,14 @@ function switchCustomizer(id, isFirst = true) {
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
-      // document.querySelector(`input[value='5']+label`).click()
-      //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
       if (isFirst) enableBuyButton(false)
-      document.querySelector('#charmsCode').value = ""
+        document.querySelector('#charmsCode').value = ""
       break;
     case 9117785129193: //collar-de-charms
-      myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-xs').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
@@ -1055,10 +1061,9 @@ function switchCustomizer(id, isFirst = true) {
       document.querySelector('#charmsCode').value = ""
       break;
     case 7412912783510: //collar-de-charms-mini
-      myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.color-keyboard').style.display = "none"
       document.querySelector('.new-color-keyboard').style.display = "flex"
       document.querySelector('#keyboard-container').classList.replace('charms-sml', 'charms-xs')
@@ -1076,10 +1081,9 @@ function switchCustomizer(id, isFirst = true) {
       if (isFirst) enableBuyButton(false)
       break;
     case 7820838174870: //charms-extra-xs
-      myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-s').style.display = "none"
       document.querySelector('.size-m').style.display = "none"
       document.querySelector('.size-l').style.display = "none"
@@ -1102,10 +1106,9 @@ function switchCustomizer(id, isFirst = true) {
       maxCharms = 100
       break;
     case 91177851291934: //charms-extra - dev
-      myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-s').style.display = "none"
       document.querySelector('.size-m').style.display = "none"
       document.querySelector('.size-l').style.display = "none"
@@ -1132,10 +1135,9 @@ function switchCustomizer(id, isFirst = true) {
       // document.getElementById('min-charms').style.display = "none"
       break;
     case 7319719280790: //charms-extra
-      myLog(currentSlug)
-      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['7', 15]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-s').style.display = "none"
       document.querySelector('.size-m').style.display = "none"
       document.querySelector('.size-l').style.display = "none"
@@ -1162,12 +1164,11 @@ function switchCustomizer(id, isFirst = true) {
       maxCharms = 19;
       break;
     case 7804532261014: //pechera-y-correa-para-mascota-de-charms
-      myLog(currentSlug)
-      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15]]
       wawasContainer.innerHTML = charmsKeyboardHTML
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#size-title').innerHTML = "01: Elige el tamaño de tu pechera"
       document.querySelector('#keyboard-title').innerHTML = "02: Personaliza tus 15 charms"
       document.querySelector('#instruction-charms').innerHTML = "Elige de 1 a 15 charms";
@@ -1193,12 +1194,11 @@ function switchCustomizer(id, isFirst = true) {
       maxCharms = 15;
       break;
     case 7923429998742: //correa-de-charms
-      myLog(currentSlug)
-      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15]]
       wawasContainer.innerHTML = charmsKeyboardHTML
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#size-container').style.display = 'none'
       document.querySelector('#size-title').innerHTML = ""
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
@@ -1224,12 +1224,11 @@ function switchCustomizer(id, isFirst = true) {
       maxCharms = 15;
       break;
     case 8247523573910: //correa-para-gato-y-razas-chicas ///
-      myLog(currentSlug)
-      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15]]
       wawasContainer.innerHTML = charmsKeyboardHTML
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#size-container').style.display = 'none'
       document.querySelector('#size-title').innerHTML = " "
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
@@ -1254,12 +1253,11 @@ function switchCustomizer(id, isFirst = true) {
       maxCharms = 15;
       break;
     case 8289135952022: //llavero-de-charms
-      myLog(currentSlug)
-      $charmsArray = [['C', 19], ['H', 18], ['A', 17], ['R', 16], ['M', 15]]
       wawasContainer.innerHTML = charmsKeyboardHTML
+      charmsPlaceholder = charmsPlaceholdersArray['small-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
       document.querySelector('.collar').style.display = "none"
@@ -1281,7 +1279,6 @@ function switchCustomizer(id, isFirst = true) {
       maxCharms = 6;
       break;
     case 9120268222697: //llavero-de- testttttttt
-      myLog(currentSlug)
       document.querySelector("form[id^='product-form-template-'] .product-form__buttons").style.display = "none";
       // primer elemento
       isPack = true;
@@ -1305,12 +1302,10 @@ function switchCustomizer(id, isFirst = true) {
 
       break;
     case 7484253372566: //collar-de-charms-glow-in-the-dark
-      myLog(currentSlug)
-      $charmsArray = [['A', 10], ['R', 10], ['M', 10], ['A', 10], ['1', 10]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['gitd-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-sml').style.display = "none"
-      //document.querySelector('.size-xl').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "none"
       document.querySelector('.new-color-keyboard').style.display = "none"
       document.querySelector('.size-xs .medidas').textContent = '20-33cm';
@@ -1318,14 +1313,13 @@ function switchCustomizer(id, isFirst = true) {
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color10')
-      // document.querySelector(`input[value='5']+label`).click()
+      document.querySelector('#instruction-subtext').innerHTML = 'Charm extra $40 c/u';
       if (isFirst) enableBuyButton(false)
       break;
     case 8582499074198: //collar-de-charms-conffeti
-      myLog(currentSlug)
-      $charmsArray = [['A', 22], ['R', 22], ['M', 22], ['A', 22], ['1', 22]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['funfetti-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-sml').style.display = "none"
       //document.querySelector('.size-xl').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "none"
@@ -1340,7 +1334,6 @@ function switchCustomizer(id, isFirst = true) {
       if (isFirst) enableBuyButton(false)
       break;
     case 9117784867049: //collar-de-gummies
-      myLog('Inicializando collar de gummys')
       wawasContainer.innerHTML = gummysKeyboardHTML
       window.$gummyColor = document.querySelector('#values-gummys-color')
       window.$qtyGummies = document.querySelector('#values-gummys-number')
@@ -1349,7 +1342,6 @@ function switchCustomizer(id, isFirst = true) {
       changeGummysCollarSize('xs')
       break;
     case 7634477645974: //collar-de-gummies
-      myLog('Inicializando collar de gummys')
       wawasContainer.innerHTML = gummysKeyboardHTML
       window.$gummyColor = document.querySelector('#values-gummys-color')
       window.$qtyGummies = document.querySelector('#values-gummys-number')
@@ -1364,11 +1356,6 @@ function switchCustomizer(id, isFirst = true) {
 //Shared functions
 function enableBuyButton(enabled) {
   enabled ? buyButton.removeAttribute('disabled') : buyButton.setAttribute('disabled', true)
-}
-
-function myLog(message) {
-  verbose ? console.log(message) : verbose = true
-  console.log($gummiesArray);
 }
 
 function createWawasContainer(node) {
@@ -1503,8 +1490,24 @@ async function getCart() {
 }
 
 //Charms functions
+
+function syncPhoneState() {
+  const phone = document.getElementById('phone');
+  const display = hasPhoneCharm() ? '' : 'none';
+  phone.style.display = display;
+  document.getElementById('phone-title').style.display = display;
+  document.getElementById('phone-level').style.display = display;
+
+  if (!hasPhoneCharm) {
+    phone.value = '';
+    phoneNumber = '';
+  }
+}
+
 function updateCharms(caller) {
-  myLog('Updated by: ' + caller);
+  debug.log('called updateCharms.', '$charmsArray:', JSON.stringify($charmsArray));
+  
+  syncPhoneState();
 
   const charmsQty = $charmsArray.length;
   let collarSize;
@@ -1533,26 +1536,23 @@ function updateCharms(caller) {
       document.querySelector(`input[value='${collarSize.toUpperCase()}']+label`).click()
     }
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
 
   //avanzar el termometro del telefono
   collarSize = document.querySelector('#values-collar-size').value;
   let collarColor = document.querySelector('#values-collar-color').value;
-  collarPhone = (document.querySelector('#phone').value) ? document.querySelector('#phone').value : 'N/A';
-  phoneDigits = document.querySelector('#phone').value.length;
+  const phoneValue = hasPhoneCharm() ? document.getElementById('phone').value : '';
+  collarPhone = phoneValue || 'N/A';
+  phoneDigits = phoneValue.length;
+  const telefono = phoneValue || 'N/A';
   document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%';
   document.querySelector('#phone-level').style.background = phoneDigits == 10 ? 'green' : 'red';
-  myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits);
-  let telefono = (document.querySelector('#phone')) ? document.querySelector('#phone').value : 'N/A';
   passProductProperties(idProduct, collarSize, collarColor, $charmsArray, collarPhone);
   //desbloquear compras si los charms son >= que el minimo, <= maximo, si los digitos del telefono son 10 
-  console.log("Array length = ", $charmsArray.length)
   if (($charmsArray.length >= 1 && $charmsArray.length <= maxCharms) && ((phoneDigits == 10) || !phonecharm) && (!firstClick)) {
-    myLog('Compras desbloqueadas')
     enableBuyButton(true)
   } else {
-    myLog('Compras bloqueadas')
     enableBuyButton(false)
   }
 
@@ -1580,7 +1580,6 @@ function updateCharms(caller) {
     p: telefono || "NA"
   }
 
-  console.log(JSON.stringify(data))
   const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(data));
   document.querySelector('#imageProduct').value = `https://wwsmx.com/revelador.html?data=${compressed}`
 
@@ -1599,26 +1598,34 @@ function emptyCharms() {
   updateCharms('emptyCharms')
 }
 
+function hasPhoneCharm() {
+  return $charmsArray.some(c => c[0] === '#');
+}
+
 function addCharm(charm) {
   if (firstClick) {
     firstClick = false
     emptyCharms()
   }
-  if ($charmsArray.length < maxCharms) {
-    $charmsArray.push([charm, currentColor])
-    document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-    if (charm == '#') {
-      phonecharm = true
-      phoneNumber = document.querySelector('#phone').value
-      document.querySelector('#phone').style.display = ''
-      document.querySelector('#phone-title').style.display = ''
-      document.querySelector('#phone-level').style.display = ''
-      //document.querySelector(`input[value='Con']+label`).click()
 
+  if ($charmsArray.length < maxCharms) {
+    const item = [charm, currentColor];
+    if (charm == '#') {
+      if (hasPhoneCharm()) return;
+      $charmsArray.push(item);
+    } else {
+      const i = $charmsArray.findIndex(c => c[0] === '#');
+      if (i === -1) {
+        $charmsArray.push(item);
+      } else {
+        $charmsArray.splice(i, 0, item);
+      }
     }
+    document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
   }
   updateCharms('addCharm')
 }
+
 function renderCharms(array) {
   let html = ''
   let phone = false
@@ -1656,8 +1663,6 @@ function changeKeysColor(color) {
     }
   }
   currentColor = parseInt(color.slice(5))
-  myLog('Color actual: ' + currentColor)
-
 }
 
 function deleteCharm(charm) {
@@ -1667,32 +1672,24 @@ function deleteCharm(charm) {
   } else {
     $charmsArray.splice(charm, 1)
     document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-    myLog(charm + ' eliminado')
     updateCharms('deleteCharm')
   }
 }
 
 function deletePhone() {
-  for (let x = 0; x < $charmsArray.length; x++) {
-    if ($charmsArray[x].includes('#')) {
-      charm = x
-      break
-    }
-  }
-  $charmsArray.splice(charm, 1)
+  const idx = $charmsArray.findIndex(c => c[0] === '#');
+  if (idx !== -1) $charmsArray.splice(idx, 1);
+
   document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
   document.querySelector('#phone').value = ''
   document.querySelector('#phone').style.display = 'none'
   document.querySelector('#phone-title').style.display = 'none'
-  //document.querySelector(`input[value='Sin']+label`).click()
-  console.log('telefono eliminado')
   phonecharm = false;
   phoneNumber = '';
   updateCharms('deletePhone')
 }
 
 function changeCollarSize(size, update = true) {
-  console.log("size = " + size)
   document.querySelector('#values-collar-size').value = size;
   removeActive();
   document.querySelector('.size-' + size).classList.add('active');
@@ -1794,13 +1791,10 @@ function emptyGummies() {
 
 function addGummy(letter) {
   if ($gummiesArray.length < maxGummys) {
-    myLog('addGummy:' + letter + ' ' + $gummyColor.value)
     $gummiesArray.push([letter, $gummyColor.value])
     renderGummies($gummiesArray)
     $qtyGummies.value = $gummiesArray.length
     updateGummys('addGummy')
-  } else {
-    myLog('demasiados gummies')
   }
   ($gummiesArray.length >= maxGummys && $gummiesArray.length <= minGummys) ? enableBuyButton(true) : enableBuyButton(false)
 }
@@ -1823,14 +1817,12 @@ function renderGummies(gummiesArray) {
 function deleteGummy(index) {
   $gummiesArray.splice(index, 1)
   renderGummies($gummiesArray)
-  myLog(index + ' eliminado')
   $qtyGummies.value = $gummiesArray.length
   updateGummys('deleteGummy');
   ($gummiesArray.length >= maxGummys && $gummiesArray.length <= minGummys) ? enableBuyButton(true) : enableBuyButton(false)
 }
 
 function updateGummys(caller) {
-  myLog(caller)
   document.querySelector('#charmsCode').value = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
 }
 
@@ -1847,7 +1839,6 @@ function changeGummiesColor(color) {
     $gkeys[x].classList.add('keyboard_key', 'gummy', 'gummy-color-' + color,)
   }
   currentGummyColor = color
-  console.log('Color de Gummies: ' + currentGummyColor)
 }
 
 function displayGummies(array) {
@@ -2197,15 +2188,6 @@ function renderStep() {
 }
 
 function passProductProperties(productId, collarSize = 'N/A', collarColor = 'N/A', charmsArray, phoneCharm = null, collarType = 'og') {
-  console.log('passProductProperties', 'Input arguments:', {
-    'productId': productId,
-    'collarsize': collarSize,
-    'collarColor': collarColor,
-    'charmsArray': charmsArray,
-    'phoneCharm': phoneCharm,
-    'collarType': collarType
-  });
-
   document.querySelector('#collarColor').value = collarColor;
 
   let savePhoneCharm;
@@ -2218,7 +2200,6 @@ function passProductProperties(productId, collarSize = 'N/A', collarColor = 'N/A
       charmsArray.push(savePhoneCharm);
     }
   });
-  console.log('passProductProperties', 'charmsArray:', JSON.stringify(charmsArray));
 
   let charmsSimplified = [];
   const abc = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
