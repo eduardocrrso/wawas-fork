@@ -7,6 +7,8 @@ const productKeys = {
   'collarSize': 'Tamaño',
   'collarColor': 'Color',
   'phoneCharm': 'Teléfono',
+  'phone': 'Teléfono',
+  'title': 'Título'
 };
 
 const productNames = {
@@ -33,7 +35,37 @@ const collarColorToClassName = {
   'Cafe': '9'
 };
 
-const gummyCharmToImg = {
+const charmColorToClassName = {
+  'Rosa fucsia': '11',
+  'Rosa': '12',
+  'Rojo': '13',
+  'Naranja': '6',
+  'Amarillo': '15',
+  'Verde': '5',
+  'Cian': '17',
+  'Azul': '18',
+  'Lila': '19',
+  'Morado': '1',
+  'Plata glitter': '20',
+  'Oro glitter': '21',
+  'Funfetti': '22',
+  'Glow': '23',
+};
+
+const figureIdToNumberFigure = {
+  'heart': 1,
+  'star': 2,
+  'flower': 3,
+  'lips': 4,
+  'peace': 5,
+  'bolt': 6,
+  'smiley': 7,
+  'skull': 8,
+  'moon': 9,
+  'butterfly': 0,
+};
+
+const gummyCharmNumberToImg = {
   6: 'pizza',
   7: 'alien',
   8: 'corazon',
@@ -51,6 +83,14 @@ const gummyCharmToImg = {
   20: 'candado-amarillo',
   21: 'llave-dorada',
   22: 'candado-dorado',
+};
+
+const gummyNameToNumber = {
+  'bolt': 2,
+  'star': 1,
+  'flower': 3,
+  'skull': 5,
+  'smiley': 4,
 };
 
 // Adds an event listener to the first textarea starting the script
@@ -93,17 +133,17 @@ const reveal = {
       if (!productObjects[index][key]) return;
 
       const productAttributeDiv = document.createElement('div');
+      const collarContainer = document.createElement('div');
+      collarContainer.classList.add('collar-container');
 
       if (key === 'productId') {
         const productName = productNames[productObjects[index][key]];
         productAttributeDiv.innerHTML = `<span class="bold">${productKeys[key]}:</span> ${productName}`;
       } else if (Array.isArray(productObjects[index][key])) {
-        const collarContainer = document.createElement('div');
-        collarContainer.classList.add('collar-container');
 
         if (productObjects[index]['productId'] === 7634477645974) {
           collarContainer.classList.add('gummies-container');
-          
+
           const gummyCollarImage = document.createElement('img');
           gummyCollarImage.src = '/assets/collar/gummy.png';
           gummyCollarImage.classList.add('gummy-collar-image');
@@ -122,15 +162,23 @@ const reveal = {
           // Create charm element and add class color
           const charmSpan = document.createElement('span');
           if (productObjects[index]['productId'] !== 7634477645974) {
-            charmSpan.classList.add(`color${charm[1]}`);
+            if (Array.isArray(charm)) {
+              charmSpan.classList.add(`color${charm[1]}`);
+            } else {
+              charmSpan.classList.add(`color${charmColorToClassName[charm['colorId']]}`);
+            }
           } else {
-            charmSpan.classList.add(`gummy-color-${charm[1]}`);
+            if (Array.isArray(charm)) {
+              charmSpan.classList.add(`gummy-color-${charm[1]}`);
+            } else {
+              charmSpan.classList.add(`color${charmColorToClassName[charm['colorId']]}`);
+            }
           }
 
           // For gummy charm, translate IDs for actual images as needed
           if (productObjects[index]['productId'] === 7634477645974 && charm[0] > 5) {
             const gummyImage = document.createElement('img');
-            gummyImage.src = `/assets/charms/gummy-${gummyCharmToImg[charm[0]]}.svg`;
+            gummyImage.src = `/assets/charms/gummy-${gummyCharmNumberToImg[charm[0]]}.svg`;
             gummyImage.classList.add('gummy');
             charmSpan.appendChild(gummyImage);
           } else if (charm[0] === '#') {
@@ -139,12 +187,38 @@ const reveal = {
             phoneCharmImage.classList.add('phoneCharm');
             charmSpan.appendChild(phoneCharmImage);
           } else {
-            charmSpan.innerHTML = charm[0];
+            if (Array.isArray(charm)) {
+              charmSpan.innerHTML = charm[0];
+            } else if (charm['kind'] === 'char') {
+              charmSpan.innerHTML = charm['char'];
+            } else if (charm['kind'] === 'figure' && productObjects[index]['productId'] !== 7634477645974) {
+              charmSpan.innerHTML = figureIdToNumberFigure[charm['figureId']];
+            } else if (charm['kind'] === 'figure' && productObjects[index]['productId'] === 7634477645974) {
+              console.log(charm);
+              if (gummyNameToNumber[charm['figureId']]) {
+                console.log(charm['figureId']);
+                charmSpan.innerHTML = gummyNameToNumber[charm['figureId']];
+              } else {
+                const gummyImage = document.createElement('img');
+                gummyImage.src = `/assets/charms/gummy-${charm['figureId']}.svg`;
+                gummyImage.classList.add('gummy');
+                charmSpan.appendChild(gummyImage);
+              }
+            }
           }
           charmContainer.appendChild(charmSpan);
         });
 
         productAttributeDiv.appendChild(collarContainer);
+      } else if (key === 'phone') {
+        const charmContainer = document.querySelector('.charm-container');
+        const charmSpan = document.createElement('span');
+        const phoneCharmImage = document.createElement('img');
+        phoneCharmImage.src = '/assets/charms/phonecharm.png';
+        phoneCharmImage.classList.add('phoneCharm');
+        charmSpan.appendChild(phoneCharmImage);
+        charmContainer.appendChild(charmSpan);
+        productAttributeDiv.innerHTML = `<span class="bold">${productKeys[key]}:</span> ${productObjects[index][key]}`;
       } else {
         productAttributeDiv.innerHTML = `<span class="bold">${productKeys[key]}:</span> ${productObjects[index][key]}`;
       }
