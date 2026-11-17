@@ -194,7 +194,6 @@ const reveal = {
             } else if (charm['kind'] === 'figure' && productObjects[index]['productId'] !== 7634477645974) {
               charmSpan.innerHTML = figureIdToNumberFigure[charm['figureId']];
             } else if (charm['kind'] === 'figure' && productObjects[index]['productId'] === 7634477645974) {
-              console.log(charm);
               if (gummyNameToNumber[charm['figureId']]) {
                 console.log(charm['figureId']);
                 charmSpan.innerHTML = gummyNameToNumber[charm['figureId']];
@@ -211,13 +210,13 @@ const reveal = {
 
         productAttributeDiv.appendChild(collarContainer);
       } else if (key === 'phone') {
-        const charmContainer = document.querySelector('.charm-container');
+        const charmContainer = document.querySelectorAll('.charm-container');
         const charmSpan = document.createElement('span');
         const phoneCharmImage = document.createElement('img');
         phoneCharmImage.src = '/assets/charms/phonecharm.png';
         phoneCharmImage.classList.add('phoneCharm');
         charmSpan.appendChild(phoneCharmImage);
-        charmContainer.appendChild(charmSpan);
+        charmContainer[index].appendChild(charmSpan);
         productAttributeDiv.innerHTML = `<span class="bold">${productKeys[key]}:</span> ${productObjects[index][key]}`;
       } else {
         productAttributeDiv.innerHTML = `<span class="bold">${productKeys[key]}:</span> ${productObjects[index][key]}`;
